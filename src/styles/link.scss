@@ -1,0 +1,32 @@
+.link {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 15px;
+  color: #121212;
+
+  &:hover {
+    color: $primary-accent;
+  }
+
+  &__gray {
+    color: $gray-light;
+
+    &:hover {
+      color: $primary-accent;
+    }
+  }
+
+  &__accent {
+    color: $primary-accent;
+
+    &:hover {
+      color: $gray-light;
+    }
+  }
+
+  &__disabled {
+    color: $gray-dark;
+  }
+}

@@ -1,0 +1,19 @@
+.button {
+  background: linear-gradient(to right, $primary-accent, #039F67);
+
+  &:hover {
+    filter: brightness(90%);
+  }
+
+  &:active {
+    filter: brightness(80%);
+  }
+
+  &:focus {
+    filter: brightness(90%);
+  }
+
+  &__disabled {
+    background: $gray-light
+  }
+}
