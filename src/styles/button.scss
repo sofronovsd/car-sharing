@@ -17,7 +17,28 @@
     width: 250px
   }
 
+  &__medium {
+    width: 164px
+  }
+
+  &__green {
+    background: linear-gradient(90deg, #13493F 0%, #0C7B1B 100%);
+  }
+
+  &__blue {
+    background: linear-gradient(90deg, #132949 0%, #0C7B67 100%);
+  }
+
+  &__red {
+    background: linear-gradient(90deg, #493013 0%, #7B0C3B 100%);
+  }
+
+  &__purple {
+    background: linear-gradient(90deg, #281349 0%, #720C7B 100%);
+  }
+
   &:hover {
+    cursor: pointer;
     filter: brightness(90%);
   }
 
@@ -26,6 +47,7 @@
   }
 
   &:focus {
+    outline: none;
     filter: brightness(90%);
   }
 

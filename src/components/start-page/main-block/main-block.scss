@@ -1,0 +1,35 @@
+@import "../../../styles/colors";
+
+.main-info {
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 5rem;
+
+  &_title {
+    font-family: Roboto,sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 70px;
+    line-height: 66px;
+
+    margin: 0;
+
+    &__accent {
+      color: $primary-accent;
+    }
+  }
+
+  &_description {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 30px;
+    color: $gray-dark;
+
+    margin: 2rem 0 4rem;
+  }
+}
