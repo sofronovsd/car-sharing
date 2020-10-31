@@ -1,5 +1,6 @@
 import React from "react";
 import './start-page.scss'
+import Slider from "./Slider";
 
 const StartPage = () => {
     return (
@@ -31,7 +32,9 @@ const StartPage = () => {
                     <span className="footer_phone">8 (495) 234-22-44</span>
                 </footer>
             </div>
-            <div className="slider">слайдер</div>
+            <div>
+                <Slider />
+            </div>
         </div>
     )
 }
