@@ -14,21 +14,21 @@ const StartPage = () => {
             </div>
             <div className="main-page">
                 <header className="header">
-                    <h2 className="header__logo">Need for drive</h2>
-                    <div className="header__location">
+                    <h2 className="header_logo">Need for drive</h2>
+                    <div className="header_location">
                         <img src="./assets/map.svg" alt="map" />
                         <span>Ульяновск</span>
                     </div>
                 </header>
-                <main className="main__info">
-                    <h1>Каршеринг</h1>
-                    <h2>Need for drive</h2>
-                    <p>Поминутная аренда авто твоего города</p>
-                    <button className="button">Забронировать</button>
+                <main className="main-info">
+                    <h1 className="main-info_title">Каршеринг</h1>
+                    <h2 className="main-info_title main-info_title__accent">Need for drive</h2>
+                    <span className="main-info_description">Поминутная аренда авто твоего города</span>
+                    <button className="button button__wide">Забронировать</button>
                 </main>
                 <footer className="footer">
-                    <p>© 2016-2019 «Need for drive»</p>
-                    <p>8 (495) 234-22-44</p>
+                    <span className="footer_copyright">© 2016-2019 «Need for drive»</span>
+                    <span className="footer_phone">8 (495) 234-22-44</span>
                 </footer>
             </div>
             <div className="slider">слайдер</div>

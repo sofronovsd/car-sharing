@@ -19,16 +19,29 @@
   justify-content: space-between;
   padding: 1rem 4rem;
 
-  &__location {
+  &_location {
     display: flex;
     align-items: center;
+
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: $gray-dark;
 
     img {
       margin-right: 5px;
     }
   }
 
-  &__logo {
+  &_logo {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 35px;
+
     color: $primary-accent
   }
 }
@@ -36,7 +49,24 @@
 .footer {
   display: flex;
   justify-content: space-between;
-  padding: 1rem 4rem;
+  padding: 2rem 4rem;
+
+  &_copyright {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    color: $gray-dark;
+  }
+
+  &_copyright {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+  }
 }
 
 .menu-btn {
@@ -96,10 +126,36 @@
   flex-direction: column;
 }
 
-.main__info {
+.main-info {
   flex-grow: 1;
 
   display: flex;
   flex-direction: column;
-  padding: 10rem 5rem 0;
+  justify-content: center;
+  padding: 0 5rem;
+
+  &_title {
+    font-family: Roboto,sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 70px;
+    line-height: 66px;
+
+    margin: 0;
+
+    &__accent {
+      color: $primary-accent;
+    }
+  }
+
+  &_description {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 30px;
+    color: $gray-dark;
+
+    margin: 2rem 0 4rem;
+  }
 }

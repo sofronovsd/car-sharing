@@ -1,5 +1,21 @@
 .button {
   background: linear-gradient(to right, $primary-accent, #039F67);
+  border-radius: 8px;
+  height: 48px;
+  width: 120px;
+  color: $gray-light;
+  border: none;
+
+  font-family: Roboto,sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+
+  &__wide {
+    width: 250px
+  }
 
   &:hover {
     filter: brightness(90%);
