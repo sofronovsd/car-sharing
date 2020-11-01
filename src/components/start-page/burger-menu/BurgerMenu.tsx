@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useCallback } from "react";
 import "./burger-menu.scss";
 
-const BurgerMenu = () => {
-  const [isActive, setActive] = useState(false);
-  const showMenu = () => {
-    setActive((prevState) => !prevState);
-  };
+interface IBurger {
+  isActive: boolean;
+  setActive: any;
+}
+
+const BurgerMenu = (props: IBurger) => {
+  const { isActive, setActive } = props;
+
+  const change = useCallback(() => {
+    setActive((prev: boolean) => !prev);
+  }, [setActive]);
+
   return (
     <button
       className={`burger-menu ${isActive ? "burger-menu__active" : ""}`}
-      onClick={showMenu}
+      onClick={change}
     >
       <div />
       <div />

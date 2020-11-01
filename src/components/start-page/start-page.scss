@@ -4,6 +4,7 @@
   max-width: 1440px;
   margin: 0 auto;
   height: 100vh;
+  overflow: hidden;
 
   display: grid;
   grid-template-columns: 64px 1fr 1fr;
@@ -20,7 +21,6 @@
   border: none;
   cursor: pointer;
   outline: none;
-  z-index: 1;
 
   position: absolute;
   left: 21px;
@@ -40,5 +40,6 @@
   display: flex;
   flex-direction: column;
 }
+
 
 

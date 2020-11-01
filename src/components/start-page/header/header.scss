@@ -16,8 +16,12 @@
     line-height: 16px;
     color: $gray-dark;
 
-    img {
+    .location {
+      display: block;
       margin-right: 5px;
+      width: 17px;
+      height: 20px;
+      background-image: url('../../../icons/location.svg');
     }
   }
 
