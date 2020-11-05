@@ -6,7 +6,25 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 5rem;
+  align-items: center;
+
+  @media screen and (max-width: 320px) {
+    justify-content: flex-start;
+  }
+
+  &_container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_container-text {
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 320px) {
+      padding: 0 1rem;
+    }
+  }
 
   &_title {
     font-family: Roboto,sans-serif;
@@ -19,6 +37,12 @@
 
     &__accent {
       color: $primary-accent;
+      font-weight: 700;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 32px;
+      line-height: 32px;
     }
   }
 
@@ -30,6 +54,11 @@
     line-height: 30px;
     color: $gray-dark;
 
-    margin: 2rem 0 4rem;
+    margin: 2rem 0 3.5rem;
+
+    @media screen and (max-width: 320px) {
+      font-size: 18px;
+      line-height: 21px;
+    }
   }
 }

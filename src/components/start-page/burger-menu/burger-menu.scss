@@ -17,10 +17,18 @@
   outline: none;
   z-index: 102;
 
+  @media screen and (max-width: 320px) {
+    top: 16px;
+  }
+
   &__active {
     div:nth-child(1) {
       top: 6px;
       transform: rotate(45deg);
+
+      @media screen and (max-width: 320px) {
+        background-color: $gray-light;
+      }
     }
 
     div:nth-child(2) {
@@ -30,6 +38,10 @@
     div:nth-child(3) {
       top: -11px;
       transform: rotate(-45deg);
+
+      @media screen and (max-width: 320px) {
+        background-color: $gray-light;
+      }
     }
   }
 
@@ -41,5 +53,9 @@
     background-color: $gray-light;
 
     transition: all .5s;
+
+    @media screen and (max-width: 320px) {
+      background-color: #121212;
+    }
   }
 }

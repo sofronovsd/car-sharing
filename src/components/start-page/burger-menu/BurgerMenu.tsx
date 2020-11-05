@@ -9,14 +9,14 @@ interface IBurger {
 const BurgerMenu = (props: IBurger) => {
   const { isActive, setActive } = props;
 
-  const change = useCallback(() => {
+  const changeActive = useCallback(() => {
     setActive((prev: boolean) => !prev);
   }, [setActive]);
 
   return (
     <button
       className={`burger-menu ${isActive ? "burger-menu__active" : ""}`}
-      onClick={change}
+      onClick={changeActive}
     >
       <div />
       <div />

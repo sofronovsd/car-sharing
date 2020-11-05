@@ -7,19 +7,40 @@
   width: 0;
   max-width: 1440px;
   height: 100%;
-  transition: width 0.2s;
+  transition: all 0.2s;
   background: linear-gradient(to right, #151B1F 55%, rgba(0, 0, 0, 0.9));
   overflow: hidden;
-  padding-left: 80px;
+  padding-left: 0;
+
+  @media screen and (max-width: 1024px) {
+    background: #151B1F;
+    align-items: normal;
+  }
 
   &__active {
     width: 100%;
     display: flex;
     z-index: 100;
+    padding-left: 80px;
+
+    @media screen and (max-width: 320px) {
+      padding-left: 0;
+    }
+
+    &+.side-bar .language-btn {
+      @media screen and (max-width: 320px) {
+        display: block;
+        z-index: 101;
+      }
+    }
   }
 
   &_menu {
     padding: 40% 2rem;
+
+    @media screen and (max-width: 320px) {
+      padding: 70px 20px;
+    }
   }
 
   ul li {
@@ -78,6 +99,16 @@
     line-height: 37px;
 
     color: #FFFFFF;
+
+    @media screen and (max-width: 768px) {
+      font-size: 28px;
+      line-height: 32px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 22px;
+      line-height: 26px;
+    }
 
     &:hover {
       cursor: pointer;

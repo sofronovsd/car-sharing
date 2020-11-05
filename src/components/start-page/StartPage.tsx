@@ -21,7 +21,7 @@ const StartPage = () => {
         <MainBlock />
         <Footer />
       </div>
-      <div>
+      <div className="slider-container">
         <Slider />
       </div>
     </div>
