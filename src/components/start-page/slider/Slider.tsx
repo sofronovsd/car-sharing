@@ -6,7 +6,10 @@ import "./slider.scss";
 const Slider = () => {
   return (
     <AwesomeSlider className="slider" animation="">
-      <div className="slider-content" data-src="./assets/slider1.png">
+      <div
+        className="slider-content"
+        data-src="./car-sharing/assets/slider1.png"
+      >
         <h2 className="slider-content_title">Бесплатная парковка</h2>
         <p className="slider-content_description">
           Оставляйте машину на платных городских парковках и разрешенных местах,
@@ -16,7 +19,10 @@ const Slider = () => {
           Подробнее
         </button>
       </div>
-      <div className="slider-content" data-src="./assets/slider2.png">
+      <div
+        className="slider-content"
+        data-src="./car-sharing/assets/slider2.png"
+      >
         <h2 className="slider-content_title">Страховка</h2>
         <p className="slider-content_description">
           Полная страховка автомобиля
@@ -25,14 +31,20 @@ const Slider = () => {
           Подробнее
         </button>
       </div>
-      <div className="slider-content" data-src="./assets/slider3.png">
+      <div
+        className="slider-content"
+        data-src="./car-sharing/assets/slider3.png"
+      >
         <h2 className="slider-content_title">Бензин</h2>
         <p className="slider-content_description">
           Полный бак на любой заправке города за наш счёт
         </p>
         <button className="button button__medium button__red">Подробнее</button>
       </div>
-      <div className="slider-content" data-src="./assets/slider4.png">
+      <div
+        className="slider-content"
+        data-src="./car-sharing/assets/slider4.png"
+      >
         <h2 className="slider-content_title">Обслуживание</h2>
         <p className="slider-content_description">
           Автомобиль проходит еженедельное ТО
