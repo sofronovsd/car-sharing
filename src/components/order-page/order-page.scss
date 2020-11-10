@@ -2,13 +2,19 @@
 
 .order-page-container {
   display: flex;
+  justify-content: center;
+}
+
+.centered-container {
+  display: flex;
   flex-direction: column;
+  max-width: 1376px;
 }
 
 .order-container {
   flex-grow: 1;
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 2.5fr 1fr;
 }
 
 .order-nav-bar {
@@ -74,6 +80,15 @@
 .order_map-container {
   display: flex;
   flex-direction: column;
+
+  span {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 1rem;
+  }
 }
 
 .typeahead-selector {
@@ -117,5 +132,65 @@
   &:hover {
     color: $primary-accent;
     cursor: pointer;
+  }
+}
+
+.order-details {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid $gray-light;
+  padding: 2rem 3rem 0 2rem;
+
+  p {
+    margin-bottom: 2rem;
+  }
+
+  label {
+    font-family: Roboto,sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: right;
+
+    margin-bottom: 2rem;
+  }
+
+  &_address {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+
+    span:first-child {
+      font-family: Roboto,sans-serif;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    span+div {
+      font-family: Roboto,sans-serif;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 16px;
+      color: $gray-dark;
+    }
+  }
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+
+  span {
+    font-family: Roboto,sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    color: $gray-dark;
+    text-align: right;
   }
 }
