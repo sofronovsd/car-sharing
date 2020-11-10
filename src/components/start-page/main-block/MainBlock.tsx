@@ -1,5 +1,6 @@
 import React from "react";
 import "./main-block.scss";
+import { Link } from "react-router-dom";
 
 const MainBlock = () => {
   return (
@@ -14,7 +15,9 @@ const MainBlock = () => {
             Поминутная аренда авто твоего города
           </span>
         </div>
-        <button className="button button__wide">Забронировать</button>
+        <Link to="/order">
+          <button className="button button__wide">Забронировать</button>
+        </Link>
       </div>
     </main>
   );

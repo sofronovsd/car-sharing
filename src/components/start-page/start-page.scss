@@ -1,50 +1,11 @@
 @import "../../styles/colors";
 
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-  height: 100vh;
-  overflow: hidden;
-
+.start-page-container {
   display: grid;
-  grid-template-columns: 64px 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 
   @media screen and (max-width: 1024px) {
-    grid-template-columns: 64px 1fr;
-  }
-
-  @media screen and (max-width: 320px) {
-    grid-template-columns: 0 1fr;
-  }
-}
-
-.side-bar {
-  background: #151B1F;
-  position: relative;
-}
-
-.language-btn {
-  padding: 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
-
-  position: absolute;
-  left: 21px;
-  bottom: 30px;
-
-  font-family: Roboto, sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 15px;
-
-  color: $primary-accent;
-  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-
-  @media screen and (max-width: 320px) {
-    display: none;
+    grid-template-columns: 1fr;
   }
 }
 
