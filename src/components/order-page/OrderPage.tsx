@@ -81,40 +81,42 @@ const OrderPage = () => {
     <div className="order-page-container">
       <Header />
       <Tabs>
-        <TabList className="order-nav-bar">
-          <Tab
-            className="tab-button link"
-            default
-            selectedClassName="link__accent"
-          >
-            Местоположение
-          </Tab>
-          <Tab
-            className="tab-button link"
-            selectedClassName="link__accent"
-            disabledClassName="link__disabled"
-            disabled={true}
-          >
-            Модель
-          </Tab>
-          <Tab
-            className="tab-button link"
-            disabled={true}
-            disabledClassName="link__disabled"
-            selectedClassName="link__accent"
-          >
-            Дополнительно
-          </Tab>
-          <Tab
-            className="tab-button link"
-            disabled={true}
-            disabledClassName="link__disabled"
-            selectedClassName="link__accent"
-          >
-            Итого
-          </Tab>
-        </TabList>
-        <TabPanel>
+        <div className="order-nav-bar-container">
+          <TabList className="order-nav-bar">
+            <Tab
+              className="tab-button link"
+              default
+              selectedClassName="link__accent"
+            >
+              Местоположение
+            </Tab>
+            <Tab
+              className="tab-button link"
+              selectedClassName="link__accent"
+              disabledClassName="link__disabled"
+              disabled={true}
+            >
+              Модель
+            </Tab>
+            <Tab
+              className="tab-button link"
+              disabled={true}
+              disabledClassName="link__disabled"
+              selectedClassName="link__accent"
+            >
+              Дополнительно
+            </Tab>
+            <Tab
+              className="tab-button link"
+              disabled={true}
+              disabledClassName="link__disabled"
+              selectedClassName="link__accent"
+            >
+              Итого
+            </Tab>
+          </TabList>
+        </div>
+        <TabPanel className="react-tabs__tab-panel">
           <main className="order-container">
             <div className="order_form-container">
               <form className="order_form">
@@ -134,17 +136,20 @@ const OrderPage = () => {
                   <button className="icon-clear" />
                 </span>
                 <label>Пункт выдачи</label>
-                <Typeahead
-                  options={filteredPoints}
-                  maxVisible={4}
-                  displayOption="name"
-                  filterOption="name"
-                  customClasses={{ input: "input", listItem: "listItem" }}
-                  showOptionsWhenEmpty={true}
-                  value={point.name}
-                  onOptionSelected={(e) => changePoint(e)}
-                  placeholder="Начните вводить пункт..."
-                />
+                <span className="clearable">
+                  <Typeahead
+                    options={filteredPoints}
+                    maxVisible={4}
+                    displayOption="name"
+                    filterOption="name"
+                    customClasses={{ input: "input", listItem: "listItem" }}
+                    showOptionsWhenEmpty={true}
+                    value={point.name}
+                    onOptionSelected={(e) => changePoint(e)}
+                    placeholder="Начните вводить пункт..."
+                  />
+                  <button className="icon-clear" />
+                </span>
               </form>
               <div className="order_map-container">
                 <span>Выбрать на карте:</span>
