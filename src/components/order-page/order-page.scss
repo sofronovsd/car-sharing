@@ -2,7 +2,7 @@
 
 .order-page-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 }
 
 .centered-container {
@@ -15,26 +15,24 @@
   flex-grow: 1;
   display: grid;
   grid-template-columns: 2.5fr 1fr;
+  max-width: 1376px;
 }
 
 .order-nav-bar {
   padding: 0.5rem 4rem;
   border-top: 1px solid $gray-light;
   border-bottom: 1px solid $gray-light;
+  display: flex;
 
-  ul {
-    display: flex;
-
-    li::after {
-      content: url('../../icons/arrow.svg');
-      margin: 0 1rem;
-    }
-
-    li:last-child::after {
-      content: none;
-    }
-
+  li::after {
+    content: url('../../icons/arrow.svg');
+    margin: 0 1rem;
   }
+
+  li:last-child::after {
+    content: none;
+  }
+
 }
 
 .order_form-container {
@@ -146,7 +144,7 @@
   }
 
   label {
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -162,15 +160,15 @@
     margin-bottom: 1rem;
 
     span:first-child {
-      font-family: Roboto,sans-serif;
+      font-family: Roboto, sans-serif;
       font-style: normal;
       font-weight: 300;
       font-size: 14px;
       line-height: 16px;
     }
 
-    span+div {
-      font-family: Roboto,sans-serif;
+    span + div {
+      font-family: Roboto, sans-serif;
       font-style: normal;
       font-weight: 300;
       font-size: 14px;
@@ -185,12 +183,21 @@
   flex-direction: column;
 
   span {
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: 300;
     font-size: 14px;
     line-height: 16px;
     color: $gray-dark;
     text-align: right;
+  }
+}
+
+.tab-button {
+  background: transparent;
+  border: none;
+
+  &:focus {
+    outline: none;
   }
 }

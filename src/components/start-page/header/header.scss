@@ -15,6 +15,10 @@
     padding: 1rem 2rem 3rem;
   }
 
+  @media screen and (min-width: 1440px) {
+    max-width: 1376px;
+  }
+
   &_location {
     display: flex;
     align-items: center;

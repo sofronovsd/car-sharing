@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../start-page/header/Header";
 import "./order-page.scss";
 import { OptionsObject, Typeahead } from "@gforge/react-typeahead-ts";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 
 interface ICity extends OptionsObject {
   name: string;
@@ -78,87 +79,101 @@ const OrderPage = () => {
 
   return (
     <div className="order-page-container">
-      <div className="centered-container">
-        <Header />
-        <nav className="order-nav-bar">
-          <ul>
-            <li>
-              <a className="link link__accent" href="#">
-                Местоположение
-              </a>
-            </li>
-            <li>
-              <a className="link link__disabled" href="#">
-                Модель
-              </a>
-            </li>
-            <li>
-              <a className="link link__disabled" href="#">
-                Дополнительно
-              </a>
-            </li>
-            <li>
-              <a className="link link__disabled" href="#">
-                Итого
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <main className="order-container">
-          <div className="order_form-container">
-            <form className="order_form">
-              <label>Город</label>
-              <span className="clearable">
+      <Header />
+      <Tabs>
+        <TabList className="order-nav-bar">
+          <Tab
+            className="tab-button link"
+            default
+            selectedClassName="link__accent"
+          >
+            Местоположение
+          </Tab>
+          <Tab
+            className="tab-button link"
+            selectedClassName="link__accent"
+            disabledClassName="link__disabled"
+            disabled={true}
+          >
+            Модель
+          </Tab>
+          <Tab
+            className="tab-button link"
+            disabled={true}
+            disabledClassName="link__disabled"
+            selectedClassName="link__accent"
+          >
+            Дополнительно
+          </Tab>
+          <Tab
+            className="tab-button link"
+            disabled={true}
+            disabledClassName="link__disabled"
+            selectedClassName="link__accent"
+          >
+            Итого
+          </Tab>
+        </TabList>
+        <TabPanel>
+          <main className="order-container">
+            <div className="order_form-container">
+              <form className="order_form">
+                <label>Город</label>
+                <span className="clearable">
+                  <Typeahead
+                    options={cities}
+                    displayOption="name"
+                    filterOption="name"
+                    maxVisible={4}
+                    customClasses={{ input: "input", listItem: "listItem" }}
+                    showOptionsWhenEmpty={true}
+                    value={city.name}
+                    onOptionSelected={(value) => changeCity(value)}
+                    placeholder="Начните вводить город..."
+                  />
+                  <button className="icon-clear" />
+                </span>
+                <label>Пункт выдачи</label>
                 <Typeahead
-                  options={cities}
+                  options={filteredPoints}
+                  maxVisible={4}
                   displayOption="name"
                   filterOption="name"
-                  maxVisible={4}
                   customClasses={{ input: "input", listItem: "listItem" }}
                   showOptionsWhenEmpty={true}
-                  value={city.name}
-                  onOptionSelected={(value) => changeCity(value)}
-                  placeholder="Начните вводить город..."
+                  value={point.name}
+                  onOptionSelected={(e) => changePoint(e)}
+                  placeholder="Начните вводить пункт..."
                 />
-                <button className="icon-clear" />
-              </span>
-              <label>Пункт выдачи</label>
-              <Typeahead
-                options={filteredPoints}
-                maxVisible={4}
-                displayOption="name"
-                filterOption="name"
-                customClasses={{ input: "input", listItem: "listItem" }}
-                showOptionsWhenEmpty={true}
-                value={point.name}
-                onOptionSelected={(e) => changePoint(e)}
-                placeholder="Начните вводить пункт..."
-              />
-            </form>
-            <div className="order_map-container">
-              <span>Выбрать на карте:</span>
-              <img src="./assets/map.png" />
-            </div>
-          </div>
-          <div className="order-details">
-            <label>Ваш заказ:</label>
-            <div className="order-details_address">
-              <span>Пункт выдачи</span>
-              <div>............</div>
-              <div className="address">
-                <span>{`${city.name}${point.address ? "," : ""}`}</span>
-                <span>{point.address}</span>
+              </form>
+              <div className="order_map-container">
+                <span>Выбрать на карте:</span>
+                <img src="./assets/map.png" alt="map" />
               </div>
             </div>
-            <p>
-              <b>Цена:</b> от 8 000 до 12 000 ₽
-            </p>
-            <button className="button button__infinite button__disabled">
-              Выбрать модель
-            </button>
-          </div>
-        </main>
-      </div>
+            <div className="order-details">
+              <label>Ваш заказ:</label>
+              <div className="order-details_address">
+                <span>Пункт выдачи</span>
+                <div>............</div>
+                <div className="address">
+                  <span>{`${city.name}${point.address ? "," : ""}`}</span>
+                  <span>{point.address}</span>
+                </div>
+              </div>
+              <p>
+                <b>Цена:</b> от 8 000 до 12 000 ₽
+              </p>
+              <button className="button button__infinite button__disabled">
+                Выбрать модель
+              </button>
+            </div>
+          </main>
+        </TabPanel>
+        <TabPanel>content for tab #2</TabPanel>
+        <TabPanel>content for tab #3</TabPanel>
+        <TabPanel>content for tab #4</TabPanel>
+      </Tabs>
     </div>
   );
 };
