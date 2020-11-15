@@ -1,4 +1,4 @@
-@import "../../../styles/colors";
+@import "../../styles/colors";
 
 .header {
   display: flex;
@@ -36,7 +36,7 @@
       margin-right: 5px;
       width: 17px;
       height: 20px;
-      background-image: url('../../../icons/location.svg');
+      background-image: url('../../icons/location.svg');
     }
   }
 

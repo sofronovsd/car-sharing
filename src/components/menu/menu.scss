@@ -1,4 +1,4 @@
-@import "../../../styles/colors";
+@import "../../styles/colors";
 
 .modal {
   display: flex;
@@ -53,26 +53,26 @@
     display: flex;
 
     .telegram {
-      background-image: url("../../../icons/Telegram_white.svg");
+      background-image: url("../../icons/Telegram_white.svg");
 
       &:hover {
-        background-image: url("../../../icons/Telegram_accent.svg");
+        background-image: url("../../icons/Telegram_accent.svg");
       }
     }
 
     .facebook {
-      background-image: url("../../../icons/Facebook_white.svg");
+      background-image: url("../../icons/Facebook_white.svg");
 
       &:hover {
-        background-image: url("../../../icons/Facebook_accent.svg");
+        background-image: url("../../icons/Facebook_accent.svg");
       }
     }
 
     .instagram {
-      background-image: url("../../../icons/Instagram_white.svg");
+      background-image: url("../../icons/Instagram_white.svg");
 
       &:hover {
-        background-image: url("../../../icons/Instagram_accent.svg");
+        background-image: url("../../icons/Instagram_accent.svg");
       }
     }
 

@@ -1,9 +1,9 @@
 import React from "react";
 import "./start-page.scss";
-import Slider from "./slider/Slider";
-import Header from "./header/Header";
-import MainBlock from "./main-block/MainBlock";
-import Footer from "./footer/Footer";
+import Slider from "../../slider/Slider";
+import Header from "../../header/Header";
+import MainBlock from "../../main-block/MainBlock";
+import Footer from "../../footer/Footer";
 
 const StartPage = () => {
   return (

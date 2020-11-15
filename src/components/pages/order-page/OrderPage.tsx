@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Header from "../start-page/header/Header";
+import Header from "../../header/Header";
 import "./order-page.scss";
-import { OptionsObject, Typeahead } from "@gforge/react-typeahead-ts";
+import { Typeahead } from "@gforge/react-typeahead-ts";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-
-interface ICity extends OptionsObject {
-  name: string;
-  id: string;
-}
-
-interface IPoint extends OptionsObject {
-  name: string;
-  address: string;
-  cityId: ICityId;
-}
-
-interface ICityId {
-  id: string;
-}
+import ICity from "../../../interfaces/i-city";
+import IPoint from "../../../interfaces/i-point";
+import OrderDetails from "../../order-details/order-details";
+import MapWidget from "../../map-widget/map-widget";
 
 const initialCity: ICity = { name: "", id: "" };
 const initialPoint: IPoint = { name: "", address: "", cityId: { id: "" } };
@@ -151,28 +140,9 @@ const OrderPage = () => {
                   <button className="icon-clear" />
                 </span>
               </form>
-              <div className="order_map-container">
-                <span>Выбрать на карте:</span>
-                <img src="./assets/map.png" alt="map" />
-              </div>
+              <MapWidget />
             </div>
-            <div className="order-details">
-              <label>Ваш заказ:</label>
-              <div className="order-details_address">
-                <span>Пункт выдачи</span>
-                <div>............</div>
-                <div className="address">
-                  <span>{`${city.name}${point.address ? "," : ""}`}</span>
-                  <span>{point.address}</span>
-                </div>
-              </div>
-              <p>
-                <b>Цена:</b> от 8 000 до 12 000 ₽
-              </p>
-              <button className="button button__infinite button__disabled">
-                Выбрать модель
-              </button>
-            </div>
+            <OrderDetails city={city} point={point} />
           </main>
         </TabPanel>
         <TabPanel>content for tab #2</TabPanel>

@@ -1,0 +1,17 @@
+.order_map-container {
+  display: flex;
+  flex-direction: column;
+
+  img {
+    width: 100%;
+  }
+
+  span {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 1rem;
+  }
+}

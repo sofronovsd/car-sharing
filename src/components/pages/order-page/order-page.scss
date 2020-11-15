@@ -1,4 +1,4 @@
-@import "./src/styles/colors";
+@import "../../../styles/colors";
 
 .order-page-container {
   display: flex;
@@ -45,7 +45,7 @@
   }
 
   li::after {
-    content: url('../../icons/arrow.svg');
+    content: url('../../../icons/arrow.svg');
     margin: 0 1rem;
   }
 
@@ -99,24 +99,6 @@
   }
 }
 
-.order_map-container {
-  display: flex;
-  flex-direction: column;
-
-  img {
-    width: 100%;
-  }
-
-  span {
-    font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 16px;
-    margin-bottom: 1rem;
-  }
-}
-
 .typeahead-selector {
   position: absolute;
   background-color: white;
@@ -155,76 +137,12 @@
   right: 0;
   top: 0;
   padding-right: 4px;
-  background: url("../../icons/clear.svg");
+  background: url("../../../icons/clear.svg");
   border: none;
 
   &:hover {
     color: $primary-accent;
     cursor: pointer;
-  }
-}
-
-.order-details {
-  display: flex;
-  flex-direction: column;
-  border-left: 1px solid $gray-light;
-  padding: 2rem 3rem 0 2rem;
-
-  @media screen and (max-width: 320px) {
-    padding: 2rem;
-  }
-
-  p {
-    margin-bottom: 2rem;
-  }
-
-  label {
-    font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 21px;
-    text-align: right;
-
-    margin-bottom: 2rem;
-  }
-
-  &_address {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 1rem;
-
-    span:first-child {
-      font-family: Roboto, sans-serif;
-      font-style: normal;
-      font-weight: 300;
-      font-size: 14px;
-      line-height: 16px;
-    }
-
-    span + div {
-      font-family: Roboto, sans-serif;
-      font-style: normal;
-      font-weight: 300;
-      font-size: 14px;
-      line-height: 16px;
-      color: $gray-dark;
-    }
-  }
-}
-
-.address {
-  display: flex;
-  flex-direction: column;
-
-  span {
-    font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 16px;
-    color: $gray-dark;
-    text-align: right;
   }
 }
 

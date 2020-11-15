@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./App.scss";
-import StartPage from "./components/start-page/StartPage";
+import StartPage from "./components/pages/start-page/StartPage";
 import { Route, Switch } from "react-router-dom";
-import OrderPage from "./components/order-page/OrderPage";
-import Menu from "./components/start-page/menu/Menu";
-import BurgerMenu from "./components/start-page/burger-menu/BurgerMenu";
+import OrderPage from "./components/pages/order-page/OrderPage";
+import Menu from "./components/menu/Menu";
+import BurgerMenu from "./components/burger-menu/BurgerMenu";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
