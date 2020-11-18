@@ -1,15 +1,9 @@
 import React from "react";
-import ICity from "../../interfaces/i-city";
-import IPoint from "../../interfaces/i-point";
+import { connect, ConnectedProps } from "react-redux";
 import "./order-details.scss";
 
-interface OrderDetailsProps {
-  city: ICity;
-  point: IPoint;
-}
-
 const OrderDetails = (props: OrderDetailsProps) => {
-  const { city, point } = props;
+  const { name, address } = props;
   return (
     <div className="order-details">
       <label>Ваш заказ:</label>
@@ -17,8 +11,8 @@ const OrderDetails = (props: OrderDetailsProps) => {
         <span>Пункт выдачи</span>
         <div>............</div>
         <div className="address">
-          <span>{`${city.name}${point.address ? "," : ""}`}</span>
-          <span>{point.address}</span>
+          <span>{`${name}${address ? "," : ""}`}</span>
+          <span>{address}</span>
         </div>
       </div>
       <p>
@@ -31,4 +25,18 @@ const OrderDetails = (props: OrderDetailsProps) => {
   );
 };
 
-export default OrderDetails;
+const mapStateToProps = (state: any) => ({
+  name: state.location.city.name,
+  address: state.location.city.address,
+});
+
+const connector = connect(mapStateToProps, null);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type OrderDetailsProps = PropsFromRedux & {
+  name: string;
+  address: string;
+};
+
+export default connector(OrderDetails);

@@ -1,0 +1,2 @@
+export const SET_CITY_NAME = "LOCATION/SET_CITY_NAME";
+export const LOAD_CARS = "MODEL/LOAD_CARS";
