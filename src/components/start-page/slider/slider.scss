@@ -1,0 +1,89 @@
+@import "../../../styles/colors";
+
+.awssld {
+  height: 100vh;
+}
+
+.awssld__bullets {
+  bottom: 40px;
+  z-index: 2;
+}
+
+.slider-content {
+  position: absolute;
+  color: white;
+  padding: 0 15%;
+
+  &_title {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 47px;
+    color: #FFFFFF;
+
+    margin: 0;
+  }
+
+  &_description {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 24px;
+    color: $gray-light;
+
+    margin: 1rem 0 2rem;
+  }
+}
+
+.awssld__controls button {
+  height: 100%;
+  top: 0;
+}
+
+.awssld__controls button .awssld__controls__arrow-left, .awssld__controls button .awssld__controls__arrow-right {
+  opacity: 1;
+}
+
+.awssld__controls button:hover .awssld__controls__arrow-left:before {
+  opacity: 1;
+  transform: rotate(45deg);
+}
+
+.awssld__controls button:hover .awssld__controls__arrow-left:after {
+  opacity: 1;
+  transform: rotate(-45deg);
+}
+
+.awssld__controls button:hover .awssld__controls__arrow-right:before {
+  opacity: 1;
+  transform: rotate(-45deg);
+}
+
+.awssld__controls button:hover .awssld__controls__arrow-right:after {
+  opacity: 1;
+  transform: rotate(45deg);
+}
+
+.awssld__controls button:hover {
+  background-color: rgba(14, 194, 97, 0.2);
+}
+
+.awssld__bullets .awssld__bullets--active {
+  transform: none;
+}
+
+.awssld {
+  --organic-arrow-color: white;
+  --control-bullet-active-color: rgba(14, 194, 97, 1);
+  --control-bullet-color: white;
+}
+
+.awssld__content > img {
+  opacity: 0.5;
+}
+
+.awssld__content {
+  justify-content: normal;
+}

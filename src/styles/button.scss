@@ -1,0 +1,62 @@
+.button {
+  background: linear-gradient(to right, $primary-accent, #039F67);
+  border-radius: 8px;
+  height: 48px;
+  width: 120px;
+  color: $gray-light;
+  border: none;
+
+  font-family: Roboto,sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+
+  &__wide {
+    width: 250px;
+
+    @media screen and (max-width: 320px) {
+      width: 100%;
+      border-radius: unset;
+    }
+  }
+
+  &__medium {
+    width: 164px
+  }
+
+  &__green {
+    background: linear-gradient(90deg, #13493F 0%, #0C7B1B 100%);
+  }
+
+  &__blue {
+    background: linear-gradient(90deg, #132949 0%, #0C7B67 100%);
+  }
+
+  &__red {
+    background: linear-gradient(90deg, #493013 0%, #7B0C3B 100%);
+  }
+
+  &__purple {
+    background: linear-gradient(90deg, #281349 0%, #720C7B 100%);
+  }
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(90%);
+  }
+
+  &:active {
+    filter: brightness(80%);
+  }
+
+  &:focus {
+    outline: none;
+    filter: brightness(90%);
+  }
+
+  &__disabled {
+    background: $gray-light
+  }
+}

@@ -1,0 +1,61 @@
+@import "../../../styles/colors";
+
+.burger-menu {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  left: 16px;
+  top: 32px;
+  padding: 0;
+  background: transparent;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  z-index: 102;
+
+  @media screen and (max-width: 320px) {
+    top: 16px;
+  }
+
+  &__active {
+    div:nth-child(1) {
+      top: 6px;
+      transform: rotate(45deg);
+
+      @media screen and (max-width: 320px) {
+        background-color: $gray-light;
+      }
+    }
+
+    div:nth-child(2) {
+      display: none;
+    }
+
+    div:nth-child(3) {
+      top: -11px;
+      transform: rotate(-45deg);
+
+      @media screen and (max-width: 320px) {
+        background-color: $gray-light;
+      }
+    }
+  }
+
+  div {
+    position: relative;
+    width: 2rem;
+    height: 0.25rem;
+    border-radius: 10px;
+    background-color: $gray-light;
+
+    transition: all .5s;
+
+    @media screen and (max-width: 320px) {
+      background-color: #121212;
+    }
+  }
+}

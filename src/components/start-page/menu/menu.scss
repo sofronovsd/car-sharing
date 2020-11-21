@@ -1,0 +1,118 @@
+@import "../../../styles/colors";
+
+.modal {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 0;
+  max-width: 1440px;
+  height: 100%;
+  transition: all 0.2s;
+  background: linear-gradient(to right, #151B1F 55%, rgba(0, 0, 0, 0.9));
+  overflow: hidden;
+  padding-left: 0;
+
+  @media screen and (max-width: 1024px) {
+    background: #151B1F;
+    align-items: normal;
+  }
+
+  &__active {
+    width: 100%;
+    display: flex;
+    z-index: 100;
+    padding-left: 80px;
+
+    @media screen and (max-width: 320px) {
+      padding-left: 0;
+    }
+
+    &+.side-bar .language-btn {
+      @media screen and (max-width: 320px) {
+        display: block;
+        z-index: 101;
+      }
+    }
+  }
+
+  &_menu {
+    padding: 40% 2rem;
+
+    @media screen and (max-width: 320px) {
+      padding: 70px 20px;
+    }
+  }
+
+  ul li {
+    margin: 1rem 0;
+  }
+}
+
+.menu {
+
+  &__horizontal {
+    display: flex;
+
+    .telegram {
+      background-image: url("../../../icons/Telegram_white.svg");
+
+      &:hover {
+        background-image: url("../../../icons/Telegram_accent.svg");
+      }
+    }
+
+    .facebook {
+      background-image: url("../../../icons/Facebook_white.svg");
+
+      &:hover {
+        background-image: url("../../../icons/Facebook_accent.svg");
+      }
+    }
+
+    .instagram {
+      background-image: url("../../../icons/Instagram_white.svg");
+
+      &:hover {
+        background-image: url("../../../icons/Instagram_accent.svg");
+      }
+    }
+
+    span {
+      display: block;
+      width: 32px;
+      height: 32px;
+      margin-right: 1rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  a {
+    text-transform: uppercase;
+
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 37px;
+
+    color: #FFFFFF;
+
+    @media screen and (max-width: 768px) {
+      font-size: 28px;
+      line-height: 32px;
+    }
+
+    @media screen and (max-width: 320px) {
+      font-size: 22px;
+      line-height: 26px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: $primary-accent;
+    }
+  }
+}
