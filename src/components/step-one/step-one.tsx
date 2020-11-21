@@ -1,49 +1,36 @@
 import { Typeahead } from "@gforge/react-typeahead-ts";
 import MapWidget from "../map-widget/map-widget";
 import React, { useEffect, useState } from "react";
-import { setCityName } from "../../store/actions";
-import { connect, ConnectedProps } from "react-redux";
-import ICity from "../../interfaces/i-city";
-import IPoint from "../../interfaces/i-point";
+import {
+  fetchCities,
+  fetchPoints,
+  setCityAddress,
+  setCityName,
+} from "../../store/actions";
+import { connect, ConnectedProps, useDispatch, useSelector } from "react-redux";
+import ICity from "../../store/interfaces/i-city";
+import IPoint from "../../store/interfaces/i-point";
 import "./step-one.scss";
+import { LocationState } from "../../store/locationReducer";
 
 const initialCity: ICity = { name: "", id: "" };
 const initialPoint: IPoint = { name: "", address: "", cityId: { id: "" } };
-const initialPoints: IPoint[] = [];
-const initialCities: ICity[] = [];
 
-const StepOne = (props: StepOneProps) => {
-  const [cities, setCities] = useState(initialCities);
-  const [points, setPoints] = useState(initialPoints);
-  const [filteredPoints, setFilteredPoints] = useState(initialPoints);
+const StepOne = (props: PropsFromRedux) => {
+  const cities = useSelector((state: StepOneState) => state.location.cities);
+  const points = useSelector((state: StepOneState) => state.location.points);
+  const dispatch = useDispatch();
+  const [filteredPoints, setFilteredPoints] = useState(points);
   const [city, setCity] = useState(initialCity);
   const [point, setPoint] = useState(initialPoint);
 
   useEffect(() => {
-    fetch("http://api-factory.simbirsoft1.com/api/db/city", {
-      method: "GET",
-      headers: {
-        "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        const cities = res.data;
-        setCities(cities);
-      })
-      .catch((e) => console.log(e));
-    fetch("http://api-factory.simbirsoft1.com/api/db/point", {
-      method: "GET",
-      headers: {
-        "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        const points = res.data;
-        setPoints(points);
-      })
-      .catch((e) => console.log(e));
+    if (!cities || cities.length === 0 || !points || points.length === 0) {
+      (async () => {
+        dispatch(fetchCities());
+        dispatch(fetchPoints());
+      })();
+    }
   }, []);
 
   useEffect(() => {
@@ -63,6 +50,7 @@ const StepOne = (props: StepOneProps) => {
   const changePoint = (value: any) => {
     if (value) {
       setPoint(value);
+      props.setCityAddress(value.address);
     }
   };
   return (
@@ -104,22 +92,26 @@ const StepOne = (props: StepOneProps) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
+interface StepOneState {
+  location: LocationState;
+}
+
+const mapStateToProps = (state: StepOneState) => ({
   name: state.location.city.name,
   address: state.location.city.address,
+  cities: state.location.cities,
+  points: state.location.points,
 });
 
 const mapDispatchToProps = {
   setCityName,
+  setCityAddress,
+  fetchCities,
+  fetchPoints,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-
-type StepOneProps = PropsFromRedux & {
-  name: string;
-  address: string;
-};
 
 export default connector(StepOne);
