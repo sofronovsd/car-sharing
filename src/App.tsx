@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./App.scss";
-import StartPage from "./components/start-page/StartPage";
+import StartPage from "./components/pages/start-page/start-page";
 import { Route, Switch } from "react-router-dom";
-import OrderPage from "./components/order-page/OrderPage";
-import Menu from "./components/start-page/menu/Menu";
-import BurgerMenu from "./components/start-page/burger-menu/BurgerMenu";
+import OrderPage from "./components/pages/order-page/order-page";
+import BurgerMenu from "./components/burger-menu/burger-menu";
+import Menu from "./components/menu/menu";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
+
+  const changeActive = useCallback(() => {
+    setShowMenu((prev: boolean) => !prev);
+  }, [setShowMenu]);
+
   return (
     <div className="container">
       <Menu isOpen={showMenu} />
       <aside className="side-bar">
-        <BurgerMenu isActive={showMenu} setActive={setShowMenu} />
+        <BurgerMenu isActive={showMenu} changeActive={changeActive} />
         <button className="language-btn">Eng</button>
       </aside>
       <Switch>

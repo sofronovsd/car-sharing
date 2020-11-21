@@ -1,4 +1,4 @@
-@import "../../../styles/colors";
+@import "../../styles/colors";
 
 .header {
   display: flex;
@@ -15,12 +15,15 @@
     padding: 1rem 2rem 3rem;
   }
 
+  @media screen and (min-width: 1440px) {
+    width: 1376px;
+    margin: 0 auto;
+  }
+
   &_location {
     display: flex;
     align-items: center;
 
-    font-family: Roboto, sans-serif;
-    font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 16px;
@@ -31,13 +34,11 @@
       margin-right: 5px;
       width: 17px;
       height: 20px;
-      background-image: url('../../../icons/location.svg');
+      background-image: url('../../icons/location.svg');
     }
   }
 
   &_logo {
-    font-family: Roboto, sans-serif;
-    font-style: normal;
     font-weight: bold;
     font-size: 30px;
     line-height: 35px;

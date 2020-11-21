@@ -1,0 +1,60 @@
+@import "../../styles/colors";
+
+.awssld {
+  height: 100vh;
+  --organic-arrow-color: white;
+  --control-bullet-active-color: rgba(14, 194, 97, 1);
+  --control-bullet-color: white;
+
+  &__bullets {
+    bottom: 40px;
+    z-index: 2;
+
+    .awssld__bullets--active {
+      transform: none;
+    }
+  }
+
+  &__content {
+    justify-content: normal;
+
+    > img {
+      opacity: 0.5;
+    }
+  }
+
+  &__controls {
+    button {
+      height: 100%;
+      top: 0;
+
+      .awssld__controls__arrow-left, .awssld__controls__arrow-right {
+        opacity: 1;
+      }
+
+      &:hover {
+        background-color: rgba(14, 194, 97, 0.2);
+
+        .awssld__controls__arrow-left:before {
+          opacity: 1;
+          transform: rotate(45deg);
+        }
+
+        .awssld__controls__arrow-left:after {
+          opacity: 1;
+          transform: rotate(-45deg);
+        }
+
+        .awssld__controls__arrow-right:before {
+          opacity: 1;
+          transform: rotate(-45deg);
+        }
+
+        .awssld__controls__arrow-right:after {
+          opacity: 1;
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+}
