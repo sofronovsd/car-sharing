@@ -7,6 +7,10 @@
   padding: 1rem;
   position: relative;
 
+  @media screen and (max-width: 320px) {
+    height: 160px;
+  }
+
   &:hover {
     border-color: $gray-dark;
     cursor: pointer;
@@ -33,5 +37,11 @@
     position: absolute;
     bottom: 1rem;
     right: 1rem;
+
+    @media screen and (max-width: 320px) {
+      width: 100%;
+      bottom: 0;
+      right: 0;
+    }
   }
 }

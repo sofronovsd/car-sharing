@@ -1,5 +1,13 @@
 .model-grid {
   display: grid;
-  grid-template-columns: 369px 369px;
+  grid-template-columns: 1fr 1fr;
+  max-width: 738px;
   margin-top: 3rem;
+
+  @media screen and (max-width: 1020px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (max-width: 320px) {
+}
 }
