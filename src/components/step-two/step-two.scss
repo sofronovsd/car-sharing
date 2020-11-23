@@ -1,12 +1,49 @@
+@import "src/styles/colors";
+
 .model-container {
   padding: 2rem 4rem;
-
-  label {
-    margin: 0 1rem;
-  }
 }
 
-.model-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.custom-radio {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+
+  &:not(:disabled):active+label::before {
+    background-color: $primary-accent;
+    border-color: $primary-accent;
+  }
+
+  &:checked+label {
+    color: $primary-black;
+
+    &::before {
+      border: 3px solid $primary-accent;
+    }
+  }
+
+  +label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    margin-right: 1rem;
+    color: $gray-dark;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      flex-grow: 0;
+      border: 1px solid $gray-dark;
+      border-radius: 50%;
+      margin-right: 0.5em;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 50% 50%;
+      box-sizing: border-box;
+    }
+  }
+
 }

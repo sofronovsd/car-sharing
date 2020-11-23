@@ -1,35 +1,76 @@
-import { LOAD_CARS } from "./types";
+import { FETCH_CARS, SET_MODEL } from "./types";
 
 const initialState = {
+  model: {
+    id: "",
+    colors: [],
+    name: "",
+    description: "",
+    number: "",
+    priceMax: 0,
+    priceMin: 0,
+    tank: 0,
+    thumbnail: {
+      mimetype: "",
+      originalname: "",
+      path: "",
+    },
+    categoryId: {
+      description: "",
+      name: "",
+      id: "",
+    },
+  },
   cars: [],
 };
 
 interface IAction {
   type: string;
-  payload: string | ICar[];
+  payload: any;
 }
 
-interface ICar {
+export interface ICar {
+  id: string;
+  colors: string[];
   name: string;
-  price: string;
-  image: string;
-  type: string;
+  description: string;
+  number: string;
+  priceMax: number;
+  priceMin: number;
+  tank: number;
+  thumbnail: IThumbnail;
+  categoryId: CategoryId;
 }
 
-interface State {
+interface IThumbnail {
+  mimetype: string;
+  originalname: string;
+  path: string;
+}
+
+interface CategoryId {
+  description: string;
+  name: string;
+  id: string;
+}
+
+export interface ModelState {
+  model: ICar;
   cars: ICar[];
 }
 
-const modelReducer = (state: State = initialState, action: IAction) => {
-  console.log("action", action);
+const modelReducer = (state: ModelState = initialState, action: IAction) => {
   switch (action.type) {
-    case LOAD_CARS: {
-      if (typeof action.payload === "string") {
-        return state;
-      }
+    case FETCH_CARS: {
       return {
         ...state,
-        cars: state.cars.concat(action.payload),
+        cars: action.payload,
+      };
+    }
+    case SET_MODEL: {
+      return {
+        ...state,
+        model: action.payload,
       };
     }
     default:
