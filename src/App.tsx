@@ -21,8 +21,8 @@ function App() {
         <button className="language-btn">Eng</button>
       </aside>
       <Switch>
-        <Route exact path="/" component={StartPage} />
-        <Route path="/order" component={OrderPage} />
+        <Route exact path="/car-sharing" component={StartPage} />
+        <Route path="/car-sharing/order" component={OrderPage} />
       </Switch>
     </div>
   );

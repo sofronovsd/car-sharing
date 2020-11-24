@@ -1,0 +1,47 @@
+@import "src/styles/colors";
+
+.model-item {
+  width: 100%;
+  height: 224px;
+  border: 1px solid $gray-light;
+  padding: 1rem;
+  position: relative;
+
+  @media screen and (max-width: 320px) {
+    height: 160px;
+  }
+
+  &:hover {
+    border-color: $gray-dark;
+    cursor: pointer;
+  }
+
+  &__selected {
+    border-color: $primary-accent;
+  }
+
+  h4 {
+    font-size: 18px;
+    line-height: 21px;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 16px;
+    color: $gray-dark;
+  }
+
+  img {
+    width: 256px;
+    height: 116px;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+
+    @media screen and (max-width: 320px) {
+      width: 100%;
+      bottom: 0;
+      right: 0;
+    }
+  }
+}

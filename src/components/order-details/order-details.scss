@@ -23,7 +23,7 @@
     margin-bottom: 2rem;
   }
 
-  &_address {
+  &_row {
     display: flex;
     align-items: flex-end;
     margin-bottom: 1rem;
@@ -41,17 +41,17 @@
       color: $gray-dark;
     }
   }
-}
 
-.address {
-  display: flex;
-  flex-direction: column;
+  &_value {
+    display: flex;
+    flex-direction: column;
 
-  span {
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 16px;
-    color: $gray-dark;
-    text-align: right;
+    span {
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 16px;
+      color: $gray-dark;
+      text-align: right;
+    }
   }
 }
