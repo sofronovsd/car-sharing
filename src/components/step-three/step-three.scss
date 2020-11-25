@@ -1,3 +1,73 @@
+@import "~react-datepicker";
+@import "src/styles/colors";
+
 .addition-container {
   padding: 2rem 4rem;
+
+}
+
+.form-item_container {
+  margin-bottom: 2rem;
+
+  >label {
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+}
+
+.date-picker-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.rate-container {
+  display: flex;
+  flex-direction: column;
+
+  div {
+    padding-bottom: 0.5rem;
+  }
+}
+
+.custom-checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+
+  &:not(:disabled):active+label::before {
+    background-color: $primary-accent;
+    border-color: $primary-accent;
+  }
+
+  &:checked+label {
+    color: $primary-black;
+
+    &::before {
+      border: 1px solid $primary-accent;
+      display: block;
+      //background-image:url("../../icons/checked.svg") ;
+      content: url("../../icons/checked.svg") ;
+    }
+  }
+
+  +label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    margin-right: 1rem;
+    color: $gray-dark;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+      flex-grow: 0;
+      border: 1px solid $gray-dark;
+      margin-right: 0.5em;
+      box-sizing: border-box;
+    }
+  }
+
 }
