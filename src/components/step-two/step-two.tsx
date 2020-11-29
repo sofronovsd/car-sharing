@@ -1,12 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
-import "./step-two.scss";
 import { fetchCars, setModel } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { ModelState } from "../../store/modelReducer";
 import ModelGrid from "../model-grid/model-grid";
+import "./step-two.scss";
+
+interface StepTwoState {
+  model: ModelState;
+}
+
+const carsSelector = (state: StepTwoState) => state.model.cars;
 
 const StepTwo = () => {
-  const cars = useSelector((state: StepTwoState) => state.model.cars);
+  const cars = useSelector(carsSelector);
   const dispatch = useDispatch();
   const [carId, setCarId] = useState("");
   const [modelOption, setModelOption] = useState("");
@@ -101,9 +107,5 @@ const StepTwo = () => {
     </div>
   );
 };
-
-interface StepTwoState {
-  model: ModelState;
-}
 
 export default StepTwo;

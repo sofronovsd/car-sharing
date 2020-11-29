@@ -1,4 +1,6 @@
 import { FETCH_CARS, SET_MODEL } from "./types";
+import ICar from "./interfaces/i-car";
+import IAction from "./interfaces/i-action";
 
 const initialState = {
   model: {
@@ -23,36 +25,6 @@ const initialState = {
   },
   cars: [],
 };
-
-interface IAction {
-  type: string;
-  payload: any;
-}
-
-export interface ICar {
-  id: string;
-  colors: string[];
-  name: string;
-  description: string;
-  number: string;
-  priceMax: number;
-  priceMin: number;
-  tank: number;
-  thumbnail: IThumbnail;
-  categoryId: CategoryId;
-}
-
-interface IThumbnail {
-  mimetype: string;
-  originalname: string;
-  path: string;
-}
-
-interface CategoryId {
-  description: string;
-  name: string;
-  id: string;
-}
 
 export interface ModelState {
   model: ICar;

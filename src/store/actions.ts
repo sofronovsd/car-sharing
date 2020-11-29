@@ -7,7 +7,9 @@ import {
   SET_MODEL,
 } from "./types";
 import { loadCars, loadCities, loadPoints } from "../api/api-factory";
-import { ICar } from "./modelReducer";
+import { Dispatch } from "react";
+import IAction from "./interfaces/i-action";
+import ICar from "./interfaces/i-car";
 
 export function setCityName(name: string) {
   return {
@@ -24,21 +26,21 @@ export function setCityAddress(address: string) {
 }
 
 export function fetchCities() {
-  return async (dispatch: any) => {
+  return async (dispatch: Dispatch<IAction>) => {
     const response = await loadCities();
     dispatch({ type: FETCH_CITIES, payload: response.data });
   };
 }
 
 export function fetchPoints() {
-  return async (dispatch: any) => {
+  return async (dispatch: Dispatch<IAction>) => {
     const response = await loadPoints();
     dispatch({ type: FETCH_POINTS, payload: response.data });
   };
 }
 
 export function fetchCars() {
-  return async (dispatch: any) => {
+  return async (dispatch: Dispatch<IAction>) => {
     const response = await loadCars();
     dispatch({ type: FETCH_CARS, payload: response.data });
   };
