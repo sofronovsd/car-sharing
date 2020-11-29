@@ -6,6 +6,7 @@ import {
 } from "./types";
 import ICity from "./interfaces/i-city";
 import IPoint from "./interfaces/i-point";
+import IAction from "./interfaces/i-action";
 
 const initialState: LocationState = {
   city: {
@@ -27,13 +28,7 @@ export interface LocationState {
   points: IPoint[];
 }
 
-interface IAction {
-  type: string;
-  payload: string | ICity[] | IPoint[];
-}
-
 const locationReducer = (state = initialState, action: IAction) => {
-  console.log("action", action);
   switch (action.type) {
     case SET_CITY_NAME: {
       return {

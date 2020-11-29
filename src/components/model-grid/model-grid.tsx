@@ -1,8 +1,8 @@
 import React from "react";
 import classNames from "classnames";
-import { ICar } from "../../store/modelReducer";
 import "./model-grid.scss";
 import CarCard from "../car-card/car-card";
+import ICar from "../../store/interfaces/i-car";
 
 const ModelGrid = (props: any) => {
   const { filteredCars, handleCardClick, carId } = props;
