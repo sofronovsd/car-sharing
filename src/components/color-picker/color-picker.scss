@@ -1,0 +1,15 @@
+.color-picker {
+  > label {
+    text-transform: capitalize;
+  }
+
+  &_container {
+
+    margin-bottom: 2rem;
+
+    > label {
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+  }
+}

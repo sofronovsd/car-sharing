@@ -10,7 +10,7 @@ const ModelGrid = (props: any) => {
     const itemClass = classNames("model-item", {
       "model-item__selected": carId === car.id,
     });
-    return <CarCard itemClass={itemClass} car={car} />;
+    return <CarCard key={car.id} itemClass={itemClass} car={car} />;
   });
   return (
     <div className="model-grid" onClick={handleCardClick}>

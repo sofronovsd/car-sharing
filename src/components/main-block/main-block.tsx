@@ -15,7 +15,7 @@ const MainBlock = () => {
             Поминутная аренда авто твоего города
           </span>
         </div>
-        <Link to="/car-sharing/order">
+        <Link to="/order">
           <button className="button button__wide">Забронировать</button>
         </Link>
       </div>

@@ -1,120 +1,81 @@
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
+import React, { useCallback, useEffect } from "react";
 import "./step-three.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { ModelState } from "../../store/modelReducer";
+import {
+  fetchRates,
+  setChildChair,
+  setColor,
+  setFullTank,
+  setRightWheel,
+} from "../../store/actions";
+import { OrderState } from "../../store/orderReducer";
+import AdditionalRatePicker from "../additional-rate-picker/additional-rate-picker";
+import RatePicker from "../rate-picker/rate-picker";
+import ColorPicker from "../color-picker/color-picker";
+import DateTimePicker from "../date-time-picker/date-time-picker";
+
+interface StepThreeState {
+  model: ModelState;
+  order: OrderState;
+}
+
+const modelSelector = (state: StepThreeState) => state.model.model;
+const ratesSelector = (state: StepThreeState) => state.model.rates;
 
 const StepThree = () => {
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const model = useSelector(modelSelector);
+  const rates = useSelector(ratesSelector);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      dispatch(fetchRates());
+    })();
+  }, [dispatch]);
+
+  const handleColorChangeValue = useCallback(
+    (e: any) => {
+      let color = model.colors[e.target.id];
+      if (!color) {
+        color = model.colors[Math.floor(Math.random() * model.colors.length)];
+      }
+      dispatch(setColor(color));
+    },
+    [dispatch, model.colors]
+  );
+
+  const handleChangeRateValue = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const rateId = e.target.id;
+      const value = e.target.checked;
+      switch (rateId) {
+        case "service1": {
+          dispatch(setFullTank(value));
+          break;
+        }
+        case "service2": {
+          dispatch(setChildChair(value));
+          break;
+        }
+        case "service3": {
+          dispatch(setRightWheel(value));
+          break;
+        }
+        default: {
+        }
+      }
+    },
+    [dispatch]
+  );
+
   return (
     <div className="addition-container">
       <form>
-        <div className="form-item_container">
-          <label>Цвет</label>
-          <div>
-            <input
-              type="radio"
-              className="custom-radio"
-              name="color"
-              id="colorOption1"
-              defaultChecked
-            />
-            <label htmlFor="colorOption1">Любой</label>
-            <input
-              type="radio"
-              className="custom-radio"
-              name="color"
-              id="colorOption2"
-            />
-            <label htmlFor="colorOption2">Красный</label>
-            <input
-              type="radio"
-              className="custom-radio"
-              name="color"
-              id="colorOption3"
-            />
-            <label htmlFor="colorOption3">Голубой</label>
-          </div>
-        </div>
-        <div className="form-item_container">
-          <label>Дата аренды</label>
-          <div className="date-picker-container">
-            <div>
-              <label htmlFor="stateDate">С</label>
-              <DatePicker
-                selected={startDate}
-                onChange={(date: any) => setStartDate(date)}
-                id="stateDate"
-                placeholderText="Введите дату и время"
-              />
-            </div>
-            <div>
-              <label htmlFor="endDate">По</label>
-              <DatePicker
-                selected={endDate}
-                onChange={(date: any) => setEndDate(date)}
-                id="endDate"
-                placeholderText="Введите дату и время"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="form-item_container">
-          <label>Тариф</label>
-          <div className="rate-container">
-            <div>
-              <input
-                type="radio"
-                className="custom-radio"
-                name="rate"
-                id="rate1"
-                defaultChecked
-              />
-              <label htmlFor="rate1">Поминутно, 7₽/мин</label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                className="custom-radio"
-                name="rate"
-                id="rate2"
-              />
-              <label htmlFor="rate2">На сутки, 1999 ₽/сутки</label>
-            </div>
-          </div>
-        </div>
-        <div className="form-item_container">
-          <label>Доп услуги</label>
-          <div className="rate-container">
-            <div>
-              <input
-                type="checkbox"
-                name="service1"
-                id="service1"
-                className="custom-checkbox"
-                defaultChecked
-              />
-              <label htmlFor="service1">Полный бак, 500р</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                className="custom-checkbox"
-                name="service2"
-                id="service2"
-              />
-              <label htmlFor="service2">Детское кресло, 200р</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                className="custom-checkbox"
-                name="service3"
-                id="service3"
-              />
-              <label htmlFor="service3">Правый руль, 1600р</label>
-            </div>
-          </div>
-        </div>
+        <ColorPicker handleChangeValue={handleColorChangeValue} />
+        <DateTimePicker />
+        <RatePicker />
+        <AdditionalRatePicker handleChangeValue={handleChangeRateValue} />
       </form>
     </div>
   );

@@ -17,16 +17,12 @@ const CarCard = ({ itemClass, car }: CarCardProps) => {
     });
   }, []);
   return (
-    <div className={itemClass} key={car.id} data-id={car.id}>
+    <div className={itemClass} data-id={car.id}>
       <h4>{car.name}</h4>
       <p>
         {prettifyPrice(car.priceMin)} - {prettifyPrice(car.priceMax)} ₽
       </p>
-      <img
-        src={imgSrc}
-        alt="car"
-        onError={() => console.log("error", car.thumbnail)}
-      />
+      <img src={imgSrc} alt="car" />
     </div>
   );
 };

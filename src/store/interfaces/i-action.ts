@@ -4,5 +4,5 @@ import ICar from "./i-car";
 
 export default interface IAction {
   type: string;
-  payload: string | ICity[] | IPoint[] | ICar[];
+  payload: string | boolean | Date | ICity[] | IPoint[] | ICar[];
 }

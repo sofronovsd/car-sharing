@@ -1,8 +1,9 @@
-import { FETCH_CARS, SET_MODEL } from "./types";
+import { FETCH_CARS, FETCH_RATES, SET_MODEL } from "./types";
 import ICar from "./interfaces/i-car";
 import IAction from "./interfaces/i-action";
+import IRate from "./interfaces/i-rate";
 
-const initialState = {
+const initialState: ModelState = {
   model: {
     id: "",
     colors: [],
@@ -24,11 +25,13 @@ const initialState = {
     },
   },
   cars: [],
+  rates: [],
 };
 
 export interface ModelState {
   model: ICar;
   cars: ICar[];
+  rates: IRate[];
 }
 
 const modelReducer = (state: ModelState = initialState, action: IAction) => {
@@ -37,6 +40,12 @@ const modelReducer = (state: ModelState = initialState, action: IAction) => {
       return {
         ...state,
         cars: action.payload,
+      };
+    }
+    case FETCH_RATES: {
+      return {
+        ...state,
+        rates: action.payload,
       };
     }
     case SET_MODEL: {

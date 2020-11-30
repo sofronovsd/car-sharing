@@ -28,7 +28,18 @@ export async function loadPoints() {
 }
 
 export async function loadCars() {
-  const response = await fetch(`${corsUrl}${dbUrl}car`, {
+  const response = await fetch(`${corsUrl}${dbUrl}car?limit=5`, {
+    method: "GET",
+    headers,
+  });
+
+  if (response.ok) {
+    return response.json();
+  }
+}
+
+export async function loadRates() {
+  const response = await fetch(`${corsUrl}${dbUrl}rate`, {
     method: "GET",
     headers,
   });
