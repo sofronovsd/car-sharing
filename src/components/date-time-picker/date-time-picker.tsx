@@ -1,25 +1,32 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import Datetime from "react-datetime";
 import "./date-time-picker.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setDateFrom, setDateTo } from "../../store/actions";
+import { OrderState } from "../../store/orderReducer";
+import { Moment } from "moment";
+
+interface DateTimePickerState {
+  order: OrderState;
+}
+
+const dateFromSelector = (state: DateTimePickerState) => state.order.dateFrom;
+const dateToSelector = (state: DateTimePickerState) => state.order.dateTo;
 
 const DateTimePicker = () => {
   const dispatch = useDispatch();
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const startDate = useSelector(dateFromSelector);
+  const endDate = useSelector(dateToSelector);
 
   const handleChangeStartDate = useCallback(
-    (date: any) => {
-      setStartDate(date);
+    (date: string | Moment) => {
       dispatch(setDateFrom(date));
     },
     [dispatch]
   );
 
   const handleChangeEndDate = useCallback(
-    (date: any) => {
-      setEndDate(date);
+    (date: string | Moment) => {
       dispatch(setDateTo(date));
     },
     [dispatch]

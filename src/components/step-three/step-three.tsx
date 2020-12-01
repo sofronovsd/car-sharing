@@ -7,6 +7,7 @@ import {
   setChildChair,
   setColor,
   setFullTank,
+  setRate,
   setRightWheel,
 } from "../../store/actions";
 import { OrderState } from "../../store/orderReducer";
@@ -29,10 +30,12 @@ const StepThree = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async () => {
-      dispatch(fetchRates());
-    })();
-  }, [dispatch]);
+    if (!rates?.length) {
+      (async () => {
+        dispatch(fetchRates());
+      })();
+    }
+  }, [dispatch, rates?.length]);
 
   const handleColorChangeValue = useCallback(
     (e: any) => {
@@ -45,7 +48,7 @@ const StepThree = () => {
     [dispatch, model.colors]
   );
 
-  const handleChangeRateValue = useCallback(
+  const handleChangeAdditionalRateValue = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const rateId = e.target.id;
       const value = e.target.checked;
@@ -69,13 +72,24 @@ const StepThree = () => {
     [dispatch]
   );
 
+  const handleChangeRateValue = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const id = e.target.id.replace("rate", "");
+      const value = rates[Number.parseInt(id)];
+      dispatch(setRate(value));
+    },
+    [dispatch, rates]
+  );
+
   return (
     <div className="addition-container">
       <form>
         <ColorPicker handleChangeValue={handleColorChangeValue} />
         <DateTimePicker />
-        <RatePicker />
-        <AdditionalRatePicker handleChangeValue={handleChangeRateValue} />
+        <RatePicker handleChangeValue={handleChangeRateValue} />
+        <AdditionalRatePicker
+          handleChangeValue={handleChangeAdditionalRateValue}
+        />
       </form>
     </div>
   );

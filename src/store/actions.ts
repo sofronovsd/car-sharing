@@ -4,13 +4,14 @@ import {
   FETCH_POINTS,
   FETCH_RATES,
   SET_CHILD_CHAIR,
-  SET_CITY_ADDRESS,
-  SET_CITY_NAME,
+  SET_POINT,
+  SET_CITY,
   SET_COLOR,
   SET_DATE_FROM,
   SET_DATE_TO,
   SET_FULL_TANK,
   SET_MODEL,
+  SET_RATE,
   SET_RIGHT_WHEEL,
 } from "./types";
 import {
@@ -22,18 +23,22 @@ import {
 import { Dispatch } from "react";
 import IAction from "./interfaces/i-action";
 import ICar from "./interfaces/i-car";
+import IRate from "./interfaces/i-rate";
+import ICity from "./interfaces/i-city";
+import IPoint from "./interfaces/i-point";
+import { Moment } from "moment";
 
-export function setCityName(name: string) {
+export function setCity(city: ICity) {
   return {
-    type: SET_CITY_NAME,
-    payload: name,
+    type: SET_CITY,
+    payload: city,
   };
 }
 
-export function setCityAddress(address: string) {
+export function setPoint(point: IPoint) {
   return {
-    type: SET_CITY_ADDRESS,
-    payload: address,
+    type: SET_POINT,
+    payload: point,
   };
 }
 
@@ -41,6 +46,13 @@ export function setColor(color: string) {
   return {
     type: SET_COLOR,
     payload: color,
+  };
+}
+
+export function setRate(rate: IRate) {
+  return {
+    type: SET_RATE,
+    payload: rate,
   };
 }
 
@@ -65,14 +77,14 @@ export function setRightWheel(value: boolean) {
   };
 }
 
-export function setDateFrom(value: Date) {
+export function setDateFrom(value: string | Moment) {
   return {
     type: SET_DATE_FROM,
     payload: value,
   };
 }
 
-export function setDateTo(value: Date) {
+export function setDateTo(value: string | Moment) {
   return {
     type: SET_DATE_TO,
     payload: value,

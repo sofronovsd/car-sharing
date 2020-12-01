@@ -10,27 +10,31 @@ interface StepTwoState {
 }
 
 const carsSelector = (state: StepTwoState) => state.model.cars;
+const carIdSelector = (state: StepTwoState) => state.model.model.id;
 
 const StepTwo = () => {
   const cars = useSelector(carsSelector);
+  const carId = useSelector(carIdSelector);
   const dispatch = useDispatch();
-  const [carId, setCarId] = useState("");
   const [modelOption, setModelOption] = useState("");
   const [filteredCars, setFilteredCars] = useState(cars);
 
-  const handleCardClick = useCallback((e: any) => {
-    const modelItem = e.target.closest(".model-item");
-    if (modelItem) {
-      setCarId(modelItem.getAttribute("data-id"));
-    }
-  }, []);
-
-  useEffect(() => {
-    const car = cars.find((car) => car.id === carId);
-    if (car) {
-      dispatch(setModel(car));
-    }
-  }, [carId]);
+  const handleCardClick = useCallback(
+    (e: React.ChangeEvent<HTMLDivElement>) => {
+      const modelItem = e.target.closest(".model-item");
+      if (modelItem) {
+        const dataId = modelItem.getAttribute("data-id");
+        if (!dataId) {
+          return;
+        }
+        const car = cars.find((car) => car.id === dataId);
+        if (car) {
+          dispatch(setModel(car));
+        }
+      }
+    },
+    [cars, dispatch]
+  );
 
   useEffect(() => {
     if (!cars || cars.length === 0) {
@@ -38,7 +42,7 @@ const StepTwo = () => {
         dispatch(fetchCars());
       })();
     }
-  }, []);
+  }, [cars, dispatch]);
 
   useEffect(() => {
     setFilteredCars(cars);
@@ -68,11 +72,14 @@ const StepTwo = () => {
         setFilteredCars(cars);
       }
     }
-  }, [modelOption]);
+  }, [cars, modelOption]);
 
-  const handleChangeValue = useCallback((e: any) => {
-    setModelOption(e.target.id);
-  }, []);
+  const handleChangeValue = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setModelOption(e.target.id);
+    },
+    []
+  );
   return (
     <div className="model-container">
       <div onChange={handleChangeValue}>

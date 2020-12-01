@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import {
   fetchCities,
   fetchPoints,
-  setCityAddress,
-  setCityName,
+  setPoint,
+  setCity,
 } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import ICity from "../../store/interfaces/i-city";
@@ -17,19 +17,18 @@ interface StepOneState {
   location: LocationState;
 }
 
-const initialCity: ICity = { name: "", id: "" };
-const initialPoint: IPoint = { name: "", address: "", cityId: { id: "" } };
-
 const citiesSelector = (state: StepOneState) => state.location.cities;
 const pointsSelector = (state: StepOneState) => state.location.points;
+const citySelector = (state: StepOneState) => state.location.city;
+const pointSelector = (state: StepOneState) => state.location.point;
 
 const StepOne = () => {
   const cities = useSelector(citiesSelector);
   const points = useSelector(pointsSelector);
+  const city = useSelector(citySelector);
+  const point = useSelector(pointSelector);
   const dispatch = useDispatch();
   const [filteredPoints, setFilteredPoints] = useState(points);
-  const [city, setCity] = useState(initialCity);
-  const [point, setPoint] = useState(initialPoint);
 
   useEffect(() => {
     if (!cities?.length || !points?.length) {
@@ -38,7 +37,7 @@ const StepOne = () => {
         dispatch(fetchPoints());
       })();
     }
-  }, []);
+  }, [cities?.length, dispatch, points?.length]);
 
   useEffect(() => {
     const newFilteredPoints = points.filter(
@@ -50,16 +49,14 @@ const StepOne = () => {
   const changeCity = (value: string | number | OptionsObject | undefined) => {
     if (value) {
       const city = value as ICity;
-      setCity(city);
-      dispatch(setCityName(city.name));
+      dispatch(setCity(city));
     }
   };
 
   const changePoint = (value: string | number | OptionsObject | undefined) => {
     if (value) {
       const point = value as IPoint;
-      setPoint(point);
-      dispatch(setCityAddress(point.address));
+      dispatch(setPoint(point));
     }
   };
   return (

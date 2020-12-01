@@ -4,9 +4,11 @@ import {
   SET_DATE_FROM,
   SET_DATE_TO,
   SET_FULL_TANK,
+  SET_RATE,
   SET_RIGHT_WHEEL,
 } from "./types";
 import IAction from "./interfaces/i-action";
+import IRate from "./interfaces/i-rate";
 
 const initialState: OrderState = {
   color: "",
@@ -14,6 +16,13 @@ const initialState: OrderState = {
   isNeedChildChair: false,
   isRightWheel: false,
   price: 0,
+  rate: {
+    price: 0,
+    rateTypeId: {
+      name: "",
+      unit: "",
+    },
+  },
 };
 
 export interface OrderState {
@@ -24,6 +33,7 @@ export interface OrderState {
   isFullTank: boolean;
   isNeedChildChair: boolean;
   isRightWheel: boolean;
+  rate: IRate;
 }
 
 const orderReducer = (state: OrderState = initialState, action: IAction) => {
@@ -32,6 +42,12 @@ const orderReducer = (state: OrderState = initialState, action: IAction) => {
       return {
         ...state,
         color: action.payload,
+      };
+    }
+    case SET_RATE: {
+      return {
+        ...state,
+        rate: action.payload,
       };
     }
     case SET_FULL_TANK: {
