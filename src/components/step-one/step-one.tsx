@@ -1,17 +1,18 @@
 import { OptionsObject, Typeahead } from "@gforge/react-typeahead-ts";
 import MapWidget from "../map-widget/map-widget";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   fetchCities,
   fetchPoints,
-  setPoint,
   setCity,
+  setPoint,
 } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import ICity from "../../store/interfaces/i-city";
 import IPoint from "../../store/interfaces/i-point";
 import "./step-one.scss";
 import { LocationState } from "../../store/locationReducer";
+import { customFilter } from "../../utils/utils";
 
 interface StepOneState {
   location: LocationState;
@@ -40,25 +41,41 @@ const StepOne = () => {
   }, [cities?.length, dispatch, points?.length]);
 
   useEffect(() => {
-    const newFilteredPoints = points.filter(
-      (point) => point.cityId.id === city.id
-    );
+    const newFilteredPoints = points.filter((point) => {
+      if (city?.id) {
+        return point.cityId.id === city.id;
+      } else {
+        return true;
+      }
+    });
     setFilteredPoints(newFilteredPoints);
   }, [city, points]);
 
-  const changeCity = (value: string | number | OptionsObject | undefined) => {
-    if (value) {
-      const city = value as ICity;
-      dispatch(setCity(city));
-    }
-  };
+  const changeCity = useCallback(
+    (value: string | number | OptionsObject | undefined) => {
+      if (value) {
+        const city = value as ICity;
+        dispatch(setCity(city));
+      }
+    },
+    [dispatch]
+  );
 
-  const changePoint = (value: string | number | OptionsObject | undefined) => {
-    if (value) {
-      const point = value as IPoint;
-      dispatch(setPoint(point));
-    }
-  };
+  const changePoint = useCallback(
+    (value: string | number | OptionsObject | undefined) => {
+      if (value) {
+        const point = value as IPoint;
+
+        dispatch(setPoint(point));
+
+        const newCity = cities.find((city) => city.id === point.cityId.id);
+        if (newCity?.id !== city?.id) {
+          dispatch(setCity(newCity));
+        }
+      }
+    },
+    [cities, city?.id, dispatch]
+  );
   return (
     <div className="order_form-container">
       <form className="order_form">
@@ -70,9 +87,9 @@ const StepOne = () => {
             filterOption="name"
             maxVisible={4}
             customClasses={{ input: "input", listItem: "listItem" }}
-            showOptionsWhenEmpty={true}
             value={city.name}
             onOptionSelected={changeCity}
+            searchOptions={customFilter}
             placeholder="Начните вводить город..."
           />
           <button className="icon-clear" />
@@ -85,9 +102,9 @@ const StepOne = () => {
             displayOption="name"
             filterOption="name"
             customClasses={{ input: "input", listItem: "listItem" }}
-            showOptionsWhenEmpty={true}
             value={point.name}
             onOptionSelected={changePoint}
+            searchOptions={customFilter}
             placeholder="Начните вводить пункт..."
           />
           <button className="icon-clear" />

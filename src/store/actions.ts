@@ -4,13 +4,13 @@ import {
   FETCH_POINTS,
   FETCH_RATES,
   SET_CHILD_CHAIR,
-  SET_POINT,
   SET_CITY,
   SET_COLOR,
   SET_DATE_FROM,
   SET_DATE_TO,
   SET_FULL_TANK,
   SET_MODEL,
+  SET_POINT,
   SET_RATE,
   SET_RIGHT_WHEEL,
 } from "./types";
@@ -28,7 +28,7 @@ import ICity from "./interfaces/i-city";
 import IPoint from "./interfaces/i-point";
 import { Moment } from "moment";
 
-export function setCity(city: ICity) {
+export function setCity(city: ICity | undefined) {
   return {
     type: SET_CITY,
     payload: city,
