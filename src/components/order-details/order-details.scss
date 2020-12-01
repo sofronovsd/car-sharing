@@ -26,6 +26,7 @@
   &_row {
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
     margin-bottom: 1rem;
 
     span:first-child {
@@ -35,10 +36,9 @@
     }
 
     span + div {
-      font-weight: 300;
-      font-size: 14px;
-      line-height: 16px;
-      color: $gray-dark;
+      flex-grow: 1;
+      border-bottom: 2px dotted $gray-dark;
+      margin: 0 1rem 2px;
     }
   }
 
@@ -54,4 +54,8 @@
       text-align: right;
     }
   }
+}
+
+.price__red {
+  color: #f44336;
 }

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import "./order-details.scss";
 import { ModelState } from "../../store/modelReducer";
@@ -6,6 +6,7 @@ import { prettifyPrice } from "../../utils/utils";
 import { OrderState } from "../../store/orderReducer";
 import { LocationState } from "../../store/locationReducer";
 import moment from "moment";
+import classNames from "classnames";
 
 interface OrderDetailsState {
   location: LocationState;
@@ -39,6 +40,10 @@ const OrderDetails = () => {
   const isNeedChildChair = useSelector(childChairSelector);
   const isRightWheel = useSelector(rightWheelSelector);
 
+  const [isPriceOK, setPriceOK] = useState(false);
+
+  const priceClass = classNames({ price__red: !isPriceOK });
+
   const rentTime = useMemo(() => {
     if (dateFrom && dateTo) {
       return `${moment(dateTo).diff(moment(dateFrom), "hours")}ч`;
@@ -46,8 +51,9 @@ const OrderDetails = () => {
   }, [dateFrom, dateTo]);
 
   const finalPrice = useMemo(() => {
-    let price;
-    if (dateFrom && dateTo && rate) {
+    let price = 0;
+    let stringPrice = "";
+    if (dateFrom && dateTo && rate?.price) {
       const startPrice = rate.price;
       const unit = rate.rateTypeId.unit;
       let units: "minutes" | "days";
@@ -68,21 +74,36 @@ const OrderDetails = () => {
       if (units === "days") {
         time = Math.max(time, 1);
       }
-      price = `${prettifyPrice(startPrice * time)} ₽`;
-    } else if (model.priceMax) {
-      price = `от ${prettifyPrice(model.priceMin)} до ${prettifyPrice(
+      price = startPrice * time;
+    }
+
+    const isResultPriceOK =
+      price !== 0 && price < model?.priceMax && price > model?.priceMin;
+    setPriceOK(isResultPriceOK);
+
+    if (price && isResultPriceOK) {
+      stringPrice = `${prettifyPrice(price)} ₽`;
+    } else if (model?.priceMax) {
+      stringPrice = `от ${prettifyPrice(model.priceMin)} до ${prettifyPrice(
         model.priceMax
       )} ₽`;
     }
-    return price;
-  }, [dateFrom, dateTo, model.priceMax, model.priceMin, rate]);
+    return stringPrice;
+  }, [
+    dateFrom,
+    dateTo,
+    model.priceMax,
+    model.priceMin,
+    rate.price,
+    rate.rateTypeId.unit,
+  ]);
   return (
     <div className="order-details">
       <label>Ваш заказ:</label>
       {name ? (
         <div className="order-details_row">
           <span>Пункт выдачи</span>
-          <div>............</div>
+          <div />
           <div className="order-details_value">
             <span>{`${name}${address ? "," : ""}`}</span>
             <span>{address}</span>
@@ -92,7 +113,7 @@ const OrderDetails = () => {
       {model.name ? (
         <div className="order-details_row">
           <span>Модель</span>
-          <div>............</div>
+          <div />
           <div className="order-details_value">
             <span>{model.name}</span>
           </div>
@@ -101,7 +122,7 @@ const OrderDetails = () => {
       {color ? (
         <div className="order-details_row">
           <span>Цвет</span>
-          <div>............</div>
+          <div />
           <div className="order-details_value">
             <span>{color}</span>
           </div>
@@ -110,7 +131,7 @@ const OrderDetails = () => {
       {rate?.rateTypeId?.name ? (
         <div className="order-details_row">
           <span>Тариф</span>
-          <div>............</div>
+          <div />
           <div className="order-details_value">
             <span>{rate.rateTypeId.name}</span>
           </div>
@@ -119,7 +140,7 @@ const OrderDetails = () => {
       {isFullTank ? (
         <div className="order-details_row">
           <span>Полный бак</span>
-          <div>............</div>
+          <div />
           <div className="order-details_value">
             <span>Да</span>
           </div>
@@ -128,7 +149,7 @@ const OrderDetails = () => {
       {isNeedChildChair ? (
         <div className="order-details_row">
           <span>Детское кресло</span>
-          <div>............</div>
+          <div />
           <div className="order-details_value">
             <span>Да</span>
           </div>
@@ -137,7 +158,7 @@ const OrderDetails = () => {
       {isRightWheel ? (
         <div className="order-details_row">
           <span>Правый руль</span>
-          <div>............</div>
+          <div />
           <div className="order-details_value">
             <span>Да</span>
           </div>
@@ -146,14 +167,14 @@ const OrderDetails = () => {
       {rentTime ? (
         <div className="order-details_row">
           <span>Длительность аренды</span>
-          <div>............</div>
+          <div />
           <div className="order-details_value">
             <span>{rentTime}</span>
           </div>
         </div>
       ) : null}
       {finalPrice ? (
-        <p>
+        <p className={priceClass}>
           <b>Цена:</b> {finalPrice}
         </p>
       ) : null}
