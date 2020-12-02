@@ -1,0 +1,12 @@
+.model-container {
+  padding: 2rem 4rem;
+
+  label {
+    margin: 0 1rem;
+  }
+}
+
+.model-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

@@ -1,0 +1,25 @@
+@import "../../styles/colors";
+
+.slider-content {
+  position: absolute;
+  color: white;
+  padding: 0 15%;
+
+  &_title {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 47px;
+    color: #FFFFFF;
+
+    margin: 0;
+  }
+
+  &_description {
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 24px;
+    color: $gray-light;
+
+    margin: 1rem 0 2rem;
+  }
+}

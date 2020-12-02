@@ -1,0 +1,29 @@
+@import "../../../styles/colors";
+
+.start-page-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main-page {
+  display: flex;
+  flex-direction: column;
+  min-width: 550px;
+
+  @media screen and (max-width: 768px) {
+    min-width: auto;
+  }
+}
+
+.slider-container {
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+
+
