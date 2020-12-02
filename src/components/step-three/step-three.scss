@@ -13,74 +13,6 @@
   }
 }
 
-.form-item_container {
-  margin-bottom: 2rem;
-
-  > label {
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
-}
-
-.colors-container {
-  > label {
-    text-transform: capitalize;
-  }
-}
-
-.date-picker-container {
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  margin-bottom: 2rem;
-
-  > div {
-    display: flex;
-    margin-bottom: 10px;
-
-    .react-datepicker-wrapper {
-      width: 100%;
-    }
-  }
-
-  label {
-    display: inline-block;
-    width: 20px;
-    margin-right: 10px;
-    text-align: right;
-
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 16px;
-  }
-
-  input {
-    width: 100%;
-    border: none;
-    border-bottom: 1px $gray-dark solid;
-
-    &:active {
-      border: none;
-      border-bottom: 1px $gray-dark solid;
-    }
-
-    &:focus {
-      border: none;
-      border-bottom: 1px $gray-dark solid;
-      outline: none;
-    }
-  }
-}
-
-.rate-container {
-  display: flex;
-  flex-direction: column;
-
-  div {
-    padding-bottom: 0.5rem;
-  }
-}
-
 .custom-checkbox {
   position: absolute;
   z-index: -1;
@@ -97,7 +29,6 @@
     &::before {
       border: 1px solid $primary-accent;
       display: block;
-      //background-image:url("../../icons/checked.svg") ;
       content: url("../../icons/checked.svg");
     }
   }
