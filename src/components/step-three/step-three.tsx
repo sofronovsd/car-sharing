@@ -38,8 +38,8 @@ const StepThree = () => {
   }, [dispatch, rates?.length]);
 
   const handleColorChangeValue = useCallback(
-    (e: any) => {
-      let color = model.colors[e.target.id];
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      let color = model.colors[parseInt(e.target.id)];
       if (!color) {
         color = model.colors[Math.floor(Math.random() * model.colors.length)];
       }

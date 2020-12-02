@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 interface IBurger {
   isActive: boolean;
-  changeActive: any;
+  changeActive: () => void;
 }
 
 const BurgerMenu = ({ isActive, changeActive }: IBurger) => {
