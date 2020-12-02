@@ -28,7 +28,7 @@ export async function loadPoints() {
 }
 
 export async function loadCars() {
-  const response = await fetch(`${corsUrl}${dbUrl}car?limit=5`, {
+  const response = await fetch(`${corsUrl}${dbUrl}car?limit=6`, {
     method: "GET",
     headers,
   });
