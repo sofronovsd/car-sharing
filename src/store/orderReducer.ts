@@ -1,14 +1,18 @@
 import {
+  CHANGE_STAGE,
+  SET_AVAILABLE,
   SET_CHILD_CHAIR,
   SET_COLOR,
   SET_DATE_FROM,
   SET_DATE_TO,
   SET_FULL_TANK,
+  SET_PRICE,
   SET_RATE,
   SET_RIGHT_WHEEL,
 } from "./types";
 import IAction from "./interfaces/i-action";
 import IRate from "./interfaces/i-rate";
+import { Moment } from "moment";
 
 const initialState: OrderState = {
   color: "",
@@ -23,17 +27,21 @@ const initialState: OrderState = {
       unit: "",
     },
   },
+  stage: 1,
+  available: false,
 };
 
 export interface OrderState {
   color: string;
-  dateFrom?: Date;
-  dateTo?: Date;
+  dateFrom?: Moment;
+  dateTo?: Moment;
   price: number;
   isFullTank: boolean;
   isNeedChildChair: boolean;
   isRightWheel: boolean;
   rate: IRate;
+  stage: number;
+  available: boolean;
 }
 
 const orderReducer = (state: OrderState = initialState, action: IAction) => {
@@ -42,6 +50,12 @@ const orderReducer = (state: OrderState = initialState, action: IAction) => {
       return {
         ...state,
         color: action.payload,
+      };
+    }
+    case SET_PRICE: {
+      return {
+        ...state,
+        price: action.payload,
       };
     }
     case SET_RATE: {
@@ -79,6 +93,22 @@ const orderReducer = (state: OrderState = initialState, action: IAction) => {
         ...state,
         dateTo: action.payload,
       };
+    }
+    case SET_AVAILABLE: {
+      return {
+        ...state,
+        available: action.payload,
+      };
+    }
+    case CHANGE_STAGE: {
+      if (typeof action.payload === "number") {
+        return {
+          ...state,
+          stage: action.payload,
+        };
+      } else {
+        return state;
+      }
     }
     default:
       return state;

@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./order-details.scss";
 import { ModelState } from "../../store/modelReducer";
 import { prettifyPrice } from "../../utils/utils";
@@ -7,6 +7,8 @@ import { OrderState } from "../../store/orderReducer";
 import { LocationState } from "../../store/locationReducer";
 import moment from "moment";
 import classNames from "classnames";
+import orderButtons from "./order-buttons";
+import { changeStage, setPrice } from "../../store/actions";
 
 interface OrderDetailsState {
   location: LocationState;
@@ -27,8 +29,13 @@ const rightWheelSelector = (state: OrderDetailsState) =>
 const cityNameSelector = (state: OrderDetailsState) => state.location.city.name;
 const addressSelector = (state: OrderDetailsState) =>
   state.location.point.address;
+const availableSelector = (state: OrderDetailsState) => state.order.available;
 
-const OrderDetails = () => {
+interface OrderDetailsProps {
+  stage: number;
+}
+
+const OrderDetails = ({ stage }: OrderDetailsProps) => {
   const model = useSelector(modelSelector);
   const color = useSelector(colorSelector);
   const rate = useSelector(rateSelector);
@@ -39,6 +46,12 @@ const OrderDetails = () => {
   const isFullTank = useSelector(fullTankSelector);
   const isNeedChildChair = useSelector(childChairSelector);
   const isRightWheel = useSelector(rightWheelSelector);
+  const available = useSelector(availableSelector);
+  const dispatch = useDispatch();
+
+  const buttonClass = classNames("button", "button__infinite", {
+    button__disabled: !available,
+  });
 
   const [isPriceOK, setPriceOK] = useState(false);
 
@@ -83,7 +96,9 @@ const OrderDetails = () => {
 
     if (price && isResultPriceOK) {
       stringPrice = `${prettifyPrice(price)} ₽`;
+      dispatch(setPrice(price));
     } else if (model?.priceMax) {
+      dispatch(setPrice(0));
       stringPrice = `от ${prettifyPrice(model.priceMin)} до ${prettifyPrice(
         model.priceMax
       )} ₽`;
@@ -92,11 +107,16 @@ const OrderDetails = () => {
   }, [
     dateFrom,
     dateTo,
+    dispatch,
     model.priceMax,
     model.priceMin,
     rate.price,
     rate.rateTypeId.unit,
   ]);
+
+  const handleNextButtonClick = useCallback(() => {
+    dispatch(changeStage(stage + 1));
+  }, [dispatch, stage]);
   return (
     <div className="order-details">
       <label>Ваш заказ:</label>
@@ -178,8 +198,12 @@ const OrderDetails = () => {
           <b>Цена:</b> {finalPrice}
         </p>
       ) : null}
-      <button className="button button__infinite button__disabled">
-        Выбрать модель
+      <button
+        className={buttonClass}
+        onClick={handleNextButtonClick}
+        disabled={!available}
+      >
+        {orderButtons.get(stage)}
       </button>
     </div>
   );

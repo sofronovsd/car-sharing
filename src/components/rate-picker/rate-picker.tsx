@@ -31,7 +31,9 @@ const RatePicker = ({ handleChangeValue }: RatePickerProps) => {
             className="custom-radio"
             name="rate"
             id={id}
-            checked={selectedRate.rateTypeId.name === rate.rateTypeId.name}
+            defaultChecked={
+              selectedRate.rateTypeId.name === rate.rateTypeId.name
+            }
           />
           <label
             htmlFor={id}

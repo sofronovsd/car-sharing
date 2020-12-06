@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import {
   fetchCities,
   fetchPoints,
+  setAvailable,
   setCity,
   setPoint,
 } from "../../store/actions";
@@ -76,6 +77,14 @@ const StepOne = () => {
     },
     [cities, city?.id, dispatch]
   );
+
+  useEffect(() => {
+    if (city.id && point.name) {
+      dispatch(setAvailable(true));
+    } else {
+      dispatch(setAvailable(false));
+    }
+  }, [city.id, dispatch, point.name]);
   return (
     <div className="order_form-container">
       <form className="order_form">

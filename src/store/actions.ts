@@ -1,8 +1,10 @@
 import {
+  CHANGE_STAGE,
   FETCH_CARS,
   FETCH_CITIES,
   FETCH_POINTS,
   FETCH_RATES,
+  SET_AVAILABLE,
   SET_CHILD_CHAIR,
   SET_CITY,
   SET_COLOR,
@@ -11,6 +13,7 @@ import {
   SET_FULL_TANK,
   SET_MODEL,
   SET_POINT,
+  SET_PRICE,
   SET_RATE,
   SET_RIGHT_WHEEL,
 } from "./types";
@@ -46,6 +49,13 @@ export function setColor(color: string) {
   return {
     type: SET_COLOR,
     payload: color,
+  };
+}
+
+export function setPrice(price: number) {
+  return {
+    type: SET_PRICE,
+    payload: price,
   };
 }
 
@@ -87,6 +97,20 @@ export function setDateFrom(value: string | Moment) {
 export function setDateTo(value: string | Moment) {
   return {
     type: SET_DATE_TO,
+    payload: value,
+  };
+}
+
+export function changeStage(value: number) {
+  return {
+    type: CHANGE_STAGE,
+    payload: value,
+  };
+}
+
+export function setAvailable(value: boolean) {
+  return {
+    type: SET_AVAILABLE,
     payload: value,
   };
 }

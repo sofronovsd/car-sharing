@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ModelState } from "../../store/modelReducer";
 import {
   fetchRates,
+  setAvailable,
   setChildChair,
   setColor,
   setFullTank,
@@ -23,10 +24,12 @@ interface StepThreeState {
 
 const modelSelector = (state: StepThreeState) => state.model.model;
 const ratesSelector = (state: StepThreeState) => state.model.rates;
+const orderSelector = (state: StepThreeState) => state.order;
 
 const StepThree = () => {
   const model = useSelector(modelSelector);
   const rates = useSelector(ratesSelector);
+  const order = useSelector(orderSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -80,6 +83,13 @@ const StepThree = () => {
     },
     [dispatch, rates]
   );
+  useEffect(() => {
+    if (order.color && order.dateFrom && order.dateTo && order.price) {
+      dispatch(setAvailable(true));
+    } else {
+      dispatch(setAvailable(false));
+    }
+  }, [dispatch, order.color, order.dateFrom, order.dateTo, order.price]);
 
   return (
     <div className="addition-container">

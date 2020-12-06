@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { fetchCars, setModel } from "../../store/actions";
+import { fetchCars, setAvailable, setModel } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { ModelState } from "../../store/modelReducer";
 import ModelGrid from "../model-grid/model-grid";
@@ -80,6 +80,14 @@ const StepTwo = () => {
     },
     []
   );
+
+  useEffect(() => {
+    if (carId) {
+      dispatch(setAvailable(true));
+    } else {
+      dispatch(setAvailable(false));
+    }
+  }, [carId, dispatch]);
   return (
     <div className="model-container">
       <div onChange={handleChangeValue}>

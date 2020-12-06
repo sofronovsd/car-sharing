@@ -39,7 +39,8 @@ const ColorPicker = ({ handleChangeValue }: ColorPickerProps) => {
               className="custom-radio"
               name="color"
               id={id}
-              checked={selectedColor === color}
+              readOnly={true}
+              defaultChecked={selectedColor === color}
             />
             <label htmlFor={id}>{color}</label>
           </React.Fragment>
