@@ -119,7 +119,7 @@ const StepOne = () => {
           <button className="icon-clear" />
         </span>
       </form>
-      <MapWidget />
+      <MapWidget points={filteredPoints} />
     </div>
   );
 };

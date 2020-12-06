@@ -1,15 +1,27 @@
-.order_map-container {
-  display: flex;
-  flex-direction: column;
+.order_map {
+  max-width: 500px;
+  height: 300px;
 
-  img {
-    width: 100%;
+  @media screen and (max-width: 768px) {
+    max-width: 300px;
+    height: 200px;
   }
 
-  span {
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 16px;
-    margin-bottom: 1rem;
+  @media screen and (max-width: 320px) {
+    max-width: 200px;
+    height: 150px;
+  }
+
+  &_container {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    span {
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 16px;
+      margin-bottom: 1rem;
+    }
   }
 }
