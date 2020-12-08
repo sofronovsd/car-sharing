@@ -22,7 +22,7 @@ const StepFour = () => {
     loadCarImage(model.thumbnail.path).then((blob) => {
       setImgSrc(URL.createObjectURL(blob));
     });
-  }, []);
+  }, [model.thumbnail.path]);
   return (
     <div className="total-container">
       <div className="total-card">

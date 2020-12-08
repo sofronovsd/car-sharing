@@ -58,3 +58,15 @@ export async function loadCarImage(path: string) {
     return response.blob();
   }
 }
+
+export async function makeOrder(request: any) {
+  const response = await fetch(`${corsUrl}${dbUrl}order`, {
+    method: "POST",
+    headers: { ...headers, "Content-Type": "application/json;charset=utf-8" },
+    body: JSON.stringify(request),
+  });
+
+  if (response.ok) {
+    return response.json();
+  }
+}
