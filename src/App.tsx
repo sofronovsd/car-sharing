@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import OrderPage from "./components/pages/order-page/order-page";
 import BurgerMenu from "./components/burger-menu/burger-menu";
 import Menu from "./components/menu/menu";
+import FinalPage from "./components/pages/final-page/final-page";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);

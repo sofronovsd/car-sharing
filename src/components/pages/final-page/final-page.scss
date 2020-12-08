@@ -1,0 +1,55 @@
+@import "../../../styles/colors";
+
+.order-page-container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1376px;
+}
+
+.order-container {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  max-width: 1376px;
+
+  @media screen and (min-width: 1440px) {
+    width: 1376px;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 320px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.order-nav-bar-container {
+  border-top: 1px solid $gray-light;
+  border-bottom: 1px solid $gray-light;
+}
+
+.order-nav-bar {
+  padding: 0.5rem 4rem;
+  display: flex;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+
+  @media screen and (max-width: 768px) {
+    padding: 0.5rem 2rem;
+  }
+
+  @media screen and (max-width: 320px) {
+    flex-direction: column;
+  }
+
+  @media screen and (min-width: 1440px) {
+    width: 1376px;
+    margin: 0 auto;
+  }
+}

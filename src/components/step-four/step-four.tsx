@@ -36,7 +36,7 @@ const StepFour = () => {
           </p>
         ) : null}
         <p>
-          <b>Доступна с</b> {order.dateFrom?.format("DD.MM.YYYY hh:mm")}
+          <b>Доступна с</b> {order.dateFrom?.format("DD.MM.YYYY HH:mm")}
         </p>
       </div>
       <img src={imgSrc} alt="car" />

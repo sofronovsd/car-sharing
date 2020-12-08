@@ -143,7 +143,7 @@ export function fetchRates() {
   };
 }
 
-export function setModel(car: ICar) {
+export function setModel(car: ICar | undefined) {
   return {
     type: SET_MODEL,
     payload: car,

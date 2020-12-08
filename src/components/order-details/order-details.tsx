@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./order-details.scss";
 import { ModelState } from "../../store/modelReducer";
@@ -56,12 +57,14 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
   const isRightWheel = useSelector(rightWheelSelector);
   const available = useSelector(availableSelector);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [isPriceOK, setPriceOK] = useState(false);
   const [hidden, setHidden] = useState(true);
 
   const buttonClass = classNames("button", "button__infinite", {
     button__disabled: !available,
+    button__red: stage === 5,
   });
 
   const priceClass = classNames({ price__red: !isPriceOK });
@@ -74,7 +77,7 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
     const request = {
       orderStatusId: "5e26a191099b810b946c5d89",
       cityId: city.id,
-      pointId: point.name,
+      pointId: point.id,
       carId: model.id,
       color,
       dateFrom: dateFrom?.valueOf(),
@@ -85,9 +88,10 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
       isNeedChildChair,
       isRightWheel,
     };
-    makeOrder(request).then(() => {
+    makeOrder(request).then((res) => {
       setHidden((prev) => !prev);
       dispatch(changeStage(stage + 1));
+      history.push(`/order/${res.data.id}`);
     });
   }, [
     city.id,
@@ -95,11 +99,12 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
     dateFrom,
     dateTo,
     dispatch,
+    history,
     isFullTank,
     isNeedChildChair,
     isRightWheel,
     model.id,
-    point.name,
+    point.id,
     rate.rateTypeId.name,
     stage,
     totalPrice,
@@ -116,7 +121,7 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
   }, [dateFrom, dateTo]);
 
   const finalPrice = useMemo(() => {
-    let price = 0;
+    let price = totalPrice;
     let stringPrice = "";
     if (dateFrom && dateTo && rate?.price) {
       const startPrice = rate.price;
@@ -140,6 +145,9 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
         time = Math.max(time, 1);
       }
       price = startPrice * time;
+      if (isRightWheel) price += 1600;
+      if (isNeedChildChair) price += 200;
+      if (isFullTank) price += 500;
     }
 
     const isResultPriceOK =
@@ -157,17 +165,21 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
     }
     return stringPrice;
   }, [
+    totalPrice,
     dateFrom,
     dateTo,
-    dispatch,
-    model.priceMax,
-    model.priceMin,
     rate.price,
     rate.rateTypeId.unit,
+    model.priceMax,
+    model.priceMin,
+    isRightWheel,
+    isNeedChildChair,
+    isFullTank,
+    dispatch,
   ]);
 
   const handleNextButtonClick = useCallback(() => {
-    if (stage < 4) {
+    if (stage !== 4) {
       dispatch(changeStage(stage + 1));
     } else {
       changeModalVisibility();

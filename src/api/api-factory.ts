@@ -70,3 +70,14 @@ export async function makeOrder(request: any) {
     return response.json();
   }
 }
+
+export async function getOrder(id: string) {
+  const response = await fetch(`${corsUrl}${dbUrl}order/${id}`, {
+    method: "GET",
+    headers,
+  });
+
+  if (response.ok) {
+    return response.json();
+  }
+}
