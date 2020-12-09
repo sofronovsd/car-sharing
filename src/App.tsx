@@ -23,7 +23,8 @@ function App() {
       </aside>
       <Switch>
         <Route exact path="/car-sharing/" component={StartPage} />
-        <Route path="/car-sharing/order" component={OrderPage} />
+        <Route exact path="/car-sharing/order" component={OrderPage} />
+        <Route path="/car-sharing/order/:orderId" component={FinalPage} />
       </Switch>
     </div>
   );
