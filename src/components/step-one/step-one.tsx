@@ -1,58 +1,81 @@
-import { Typeahead } from "@gforge/react-typeahead-ts";
+import { OptionsObject, Typeahead } from "@gforge/react-typeahead-ts";
 import MapWidget from "../map-widget/map-widget";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   fetchCities,
   fetchPoints,
-  setCityAddress,
-  setCityName,
+  setCity,
+  setPoint,
 } from "../../store/actions";
-import { connect, ConnectedProps, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ICity from "../../store/interfaces/i-city";
 import IPoint from "../../store/interfaces/i-point";
 import "./step-one.scss";
 import { LocationState } from "../../store/locationReducer";
+import { customFilter } from "../../utils/utils";
 
-const initialCity: ICity = { name: "", id: "" };
-const initialPoint: IPoint = { name: "", address: "", cityId: { id: "" } };
+interface StepOneState {
+  location: LocationState;
+}
 
-const StepOne = (props: PropsFromRedux) => {
-  const cities = useSelector((state: StepOneState) => state.location.cities);
-  const points = useSelector((state: StepOneState) => state.location.points);
+const citiesSelector = (state: StepOneState) => state.location.cities;
+const pointsSelector = (state: StepOneState) => state.location.points;
+const citySelector = (state: StepOneState) => state.location.city;
+const pointSelector = (state: StepOneState) => state.location.point;
+
+const StepOne = () => {
+  const cities = useSelector(citiesSelector);
+  const points = useSelector(pointsSelector);
+  const city = useSelector(citySelector);
+  const point = useSelector(pointSelector);
   const dispatch = useDispatch();
   const [filteredPoints, setFilteredPoints] = useState(points);
-  const [city, setCity] = useState(initialCity);
-  const [point, setPoint] = useState(initialPoint);
 
   useEffect(() => {
-    if (!cities || cities.length === 0 || !points || points.length === 0) {
+    if (!cities?.length || !points?.length) {
       (async () => {
         dispatch(fetchCities());
         dispatch(fetchPoints());
       })();
     }
-  }, []);
+  }, [cities?.length, dispatch, points?.length]);
 
   useEffect(() => {
-    const newFilteredPoints = points.filter(
-      (point) => point.cityId.id === city.id
-    );
+    const newFilteredPoints = points.filter((point) => {
+      if (city?.id) {
+        return point.cityId.id === city.id;
+      } else {
+        return true;
+      }
+    });
     setFilteredPoints(newFilteredPoints);
   }, [city, points]);
 
-  const changeCity = (value: any) => {
-    if (value) {
-      setCity(value);
-      props.setCityName(value.name);
-    }
-  };
+  const changeCity = useCallback(
+    (value: string | number | OptionsObject | undefined) => {
+      if (value) {
+        const city = value as ICity;
+        dispatch(setCity(city));
+      }
+    },
+    [dispatch]
+  );
 
-  const changePoint = (value: any) => {
-    if (value) {
-      setPoint(value);
-      props.setCityAddress(value.address);
-    }
-  };
+  const changePoint = useCallback(
+    (value: string | number | OptionsObject | undefined) => {
+      if (value) {
+        const point = value as IPoint;
+
+        dispatch(setPoint(point));
+
+        const newCity = cities.find((city) => city.id === point.cityId.id);
+        if (newCity?.id !== city?.id) {
+          dispatch(setCity(newCity));
+        }
+      }
+    },
+    [cities, city?.id, dispatch]
+  );
   return (
     <div className="order_form-container">
       <form className="order_form">
@@ -64,9 +87,9 @@ const StepOne = (props: PropsFromRedux) => {
             filterOption="name"
             maxVisible={4}
             customClasses={{ input: "input", listItem: "listItem" }}
-            showOptionsWhenEmpty={true}
             value={city.name}
-            onOptionSelected={(value) => changeCity(value)}
+            onOptionSelected={changeCity}
+            searchOptions={customFilter}
             placeholder="Начните вводить город..."
           />
           <button className="icon-clear" />
@@ -79,9 +102,9 @@ const StepOne = (props: PropsFromRedux) => {
             displayOption="name"
             filterOption="name"
             customClasses={{ input: "input", listItem: "listItem" }}
-            showOptionsWhenEmpty={true}
             value={point.name}
-            onOptionSelected={(e) => changePoint(e)}
+            onOptionSelected={changePoint}
+            searchOptions={customFilter}
             placeholder="Начните вводить пункт..."
           />
           <button className="icon-clear" />
@@ -92,26 +115,4 @@ const StepOne = (props: PropsFromRedux) => {
   );
 };
 
-interface StepOneState {
-  location: LocationState;
-}
-
-const mapStateToProps = (state: StepOneState) => ({
-  name: state.location.city.name,
-  address: state.location.city.address,
-  cities: state.location.cities,
-  points: state.location.points,
-});
-
-const mapDispatchToProps = {
-  setCityName,
-  setCityAddress,
-  fetchCities,
-  fetchPoints,
-};
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-export default connector(StepOne);
+export default StepOne;

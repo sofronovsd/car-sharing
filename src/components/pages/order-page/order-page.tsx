@@ -5,6 +5,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import StepOne from "../../step-one/step-one";
 import OrderDetails from "../../order-details/order-details";
 import StepTwo from "../../step-two/step-two";
+import StepThree from "../../step-three/step-three";
 
 const OrderPage = () => {
   return (
@@ -30,7 +31,7 @@ const OrderPage = () => {
             </Tab>
             <Tab
               className="tab-button link"
-              disabled={true}
+              disabled={false}
               disabledClassName="link__disabled"
               selectedClassName="link__accent"
             >
@@ -58,7 +59,12 @@ const OrderPage = () => {
             <OrderDetails />
           </main>
         </TabPanel>
-        <TabPanel>content for tab #3</TabPanel>
+        <TabPanel>
+          <main className="order-container">
+            <StepThree />
+            <OrderDetails />
+          </main>
+        </TabPanel>
         <TabPanel>content for tab #4</TabPanel>
       </Tabs>
     </div>

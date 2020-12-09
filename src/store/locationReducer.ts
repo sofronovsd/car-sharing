@@ -1,56 +1,43 @@
-import {
-  FETCH_CITIES,
-  FETCH_POINTS,
-  SET_CITY_ADDRESS,
-  SET_CITY_NAME,
-} from "./types";
+import { FETCH_CITIES, FETCH_POINTS, SET_POINT, SET_CITY } from "./types";
 import ICity from "./interfaces/i-city";
 import IPoint from "./interfaces/i-point";
+import IAction from "./interfaces/i-action";
 
 const initialState: LocationState = {
   city: {
     name: "",
+    id: "",
+  },
+  point: {
+    name: "",
     address: "",
+    cityId: {
+      id: "",
+    },
   },
   cities: [],
   points: [],
 };
 
-interface StateCity {
-  name: string;
-  address: string;
-}
-
 export interface LocationState {
-  city: StateCity;
+  city: ICity;
+  point: IPoint;
   cities: ICity[];
   points: IPoint[];
 }
 
-interface IAction {
-  type: string;
-  payload: string | ICity[] | IPoint[];
-}
-
 const locationReducer = (state = initialState, action: IAction) => {
-  console.log("action", action);
   switch (action.type) {
-    case SET_CITY_NAME: {
+    case SET_CITY: {
       return {
         ...state,
-        city: {
-          ...state.city,
-          name: action.payload,
-        },
+        city: action.payload,
       };
     }
-    case SET_CITY_ADDRESS: {
+    case SET_POINT: {
       return {
         ...state,
-        city: {
-          ...state.city,
-          address: action.payload,
-        },
+        point: action.payload,
       };
     }
     case FETCH_CITIES: {

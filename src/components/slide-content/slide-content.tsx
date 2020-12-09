@@ -2,8 +2,17 @@ import React from "react";
 import "./slide-content.scss";
 import classNames from "classnames";
 
-const SlideContent = (props: any) => {
-  const { title, description, buttonClass } = props;
+interface SlideContentProps {
+  title: string;
+  description: string;
+  buttonClass: string;
+}
+
+const SlideContent = ({
+  title,
+  description,
+  buttonClass,
+}: SlideContentProps) => {
   const btnClass = classNames("button", "button__medium", buttonClass);
   return (
     <>

@@ -1,35 +1,57 @@
-import { LOAD_CARS } from "./types";
+import { FETCH_CARS, FETCH_RATES, SET_MODEL } from "./types";
+import ICar from "./interfaces/i-car";
+import IAction from "./interfaces/i-action";
+import IRate from "./interfaces/i-rate";
 
-const initialState = {
+const initialState: ModelState = {
+  model: {
+    id: "",
+    colors: [],
+    name: "",
+    description: "",
+    number: "",
+    priceMax: 0,
+    priceMin: 0,
+    tank: 0,
+    thumbnail: {
+      mimetype: "",
+      originalname: "",
+      path: "",
+    },
+    categoryId: {
+      description: "",
+      name: "",
+      id: "",
+    },
+  },
   cars: [],
+  rates: [],
 };
 
-interface IAction {
-  type: string;
-  payload: string | ICar[];
-}
-
-interface ICar {
-  name: string;
-  price: string;
-  image: string;
-  type: string;
-}
-
-interface State {
+export interface ModelState {
+  model: ICar;
   cars: ICar[];
+  rates: IRate[];
 }
 
-const modelReducer = (state: State = initialState, action: IAction) => {
-  console.log("action", action);
+const modelReducer = (state: ModelState = initialState, action: IAction) => {
   switch (action.type) {
-    case LOAD_CARS: {
-      if (typeof action.payload === "string") {
-        return state;
-      }
+    case FETCH_CARS: {
       return {
         ...state,
-        cars: state.cars.concat(action.payload),
+        cars: action.payload,
+      };
+    }
+    case FETCH_RATES: {
+      return {
+        ...state,
+        rates: action.payload,
+      };
+    }
+    case SET_MODEL: {
+      return {
+        ...state,
+        model: action.payload,
       };
     }
     default:
