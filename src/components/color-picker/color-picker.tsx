@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { ModelState } from "../../store/modelReducer";
 import "./color-picker.scss";
 import { OrderState } from "../../store/orderReducer";
+import CustomRadio from "../custom-radio/custom-radio";
 
 interface ColorPickerProps {
   handleChangeValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -25,8 +26,7 @@ const ColorPicker = ({ handleChangeValue }: ColorPickerProps) => {
     const id = "100";
     const colorOptionsTemplate = [
       <React.Fragment key={id}>
-        <input type="radio" className="custom-radio" name="color" id={id} />
-        <label htmlFor={id}>Любой</label>
+        <CustomRadio name="color" id={id} defaultChecked={false} text="Любой" />
       </React.Fragment>,
     ];
     return colorOptionsTemplate.concat(
@@ -34,15 +34,12 @@ const ColorPicker = ({ handleChangeValue }: ColorPickerProps) => {
         const id = index.toString();
         return (
           <React.Fragment key={id}>
-            <input
-              type="radio"
-              className="custom-radio"
+            <CustomRadio
               name="color"
               id={id}
-              readOnly={true}
               defaultChecked={selectedColor === color}
+              text={color}
             />
-            <label htmlFor={id}>{color}</label>
           </React.Fragment>
         );
       })

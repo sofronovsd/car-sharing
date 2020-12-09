@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import "./step-three.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { ModelState } from "../../store/modelReducer";
 import {
   fetchRates,
   setAvailable,
@@ -11,20 +10,15 @@ import {
   setRate,
   setRightWheel,
 } from "../../store/actions";
-import { OrderState } from "../../store/orderReducer";
 import AdditionalRatePicker from "../additional-rate-picker/additional-rate-picker";
 import RatePicker from "../rate-picker/rate-picker";
 import ColorPicker from "../color-picker/color-picker";
 import DateTimePicker from "../date-time-picker/date-time-picker";
-
-interface StepThreeState {
-  model: ModelState;
-  order: OrderState;
-}
-
-const modelSelector = (state: StepThreeState) => state.model.model;
-const ratesSelector = (state: StepThreeState) => state.model.rates;
-const orderSelector = (state: StepThreeState) => state.order;
+import {
+  modelSelector,
+  orderSelector,
+  ratesSelector,
+} from "../../store/selectors";
 
 const StepThree = () => {
   const model = useSelector(modelSelector);

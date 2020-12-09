@@ -3,9 +3,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../header/header";
 import "./final-page.scss";
 import OrderDetails from "../../order-details/order-details";
-import { OrderState } from "../../../store/orderReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { ModelState } from "../../../store/modelReducer";
 import { getOrder, loadCarImage } from "../../../api/api-factory";
 import {
   setAvailable,
@@ -18,21 +16,15 @@ import {
   setModel,
   setPoint,
   setPrice,
+  setRate,
   setRightWheel,
 } from "../../../store/actions";
 import moment from "moment";
-
-interface FinalPageState {
-  model: ModelState;
-  order: OrderState;
-}
+import { modelSelector, orderSelector } from "../../../store/selectors";
 
 interface FinalPageParams {
   orderId: string;
 }
-
-const modelSelector = (state: FinalPageState) => state.model.model;
-const orderSelector = (state: FinalPageState) => state.order;
 
 const FinalPage = () => {
   const model = useSelector(modelSelector);
@@ -61,6 +53,7 @@ const FinalPage = () => {
         dispatch(setCity(data.cityId));
         dispatch(setModel(data.carId));
         dispatch(setPoint(data.pointId));
+        dispatch(setRate(data.rateId));
         dispatch(setAvailable(true));
       });
     }

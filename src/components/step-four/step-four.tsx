@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./step-four.scss";
-import { ModelState } from "../../store/modelReducer";
-import { OrderState } from "../../store/orderReducer";
 import { useSelector } from "react-redux";
 import { loadCarImage } from "../../api/api-factory";
-
-interface StepFourState {
-  model: ModelState;
-  order: OrderState;
-}
-
-const modelSelector = (state: StepFourState) => state.model.model;
-const orderSelector = (state: StepFourState) => state.order;
+import { modelSelector, orderSelector } from "../../store/selectors";
 
 const StepFour = () => {
   const model = useSelector(modelSelector);

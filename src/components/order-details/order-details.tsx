@@ -2,40 +2,29 @@ import React, { useCallback, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./order-details.scss";
-import { ModelState } from "../../store/modelReducer";
 import { prettifyPrice } from "../../utils/utils";
-import { OrderState } from "../../store/orderReducer";
-import { LocationState } from "../../store/locationReducer";
 import moment from "moment";
 import classNames from "classnames";
 import orderButtons from "./order-buttons";
 import { changeStage, setPrice } from "../../store/actions";
 import Modal from "../modal/modal";
 import { makeOrder } from "../../api/api-factory";
-
-interface OrderDetailsState {
-  location: LocationState;
-  model: ModelState;
-  order: OrderState;
-}
-
-const modelSelector = (state: OrderDetailsState) => state.model.model;
-const colorSelector = (state: OrderDetailsState) => state.order.color;
-const rateSelector = (state: OrderDetailsState) => state.order.rate;
-const priceSelector = (state: OrderDetailsState) => state.order.price;
-const dateFromSelector = (state: OrderDetailsState) => state.order.dateFrom;
-const dateToSelector = (state: OrderDetailsState) => state.order.dateTo;
-const fullTankSelector = (state: OrderDetailsState) => state.order.isFullTank;
-const childChairSelector = (state: OrderDetailsState) =>
-  state.order.isNeedChildChair;
-const rightWheelSelector = (state: OrderDetailsState) =>
-  state.order.isRightWheel;
-const cityNameSelector = (state: OrderDetailsState) => state.location.city.name;
-const citySelector = (state: OrderDetailsState) => state.location.city;
-const pointSelector = (state: OrderDetailsState) => state.location.point;
-const addressSelector = (state: OrderDetailsState) =>
-  state.location.point.address;
-const availableSelector = (state: OrderDetailsState) => state.order.available;
+import {
+  addressSelector,
+  availableSelector,
+  childChairSelector,
+  cityNameSelector,
+  citySelector,
+  colorSelector,
+  dateFromSelector,
+  dateToSelector,
+  fullTankSelector,
+  modelSelector,
+  pointSelector,
+  priceSelector,
+  rateSelector,
+  rightWheelSelector,
+} from "../../store/selectors";
 
 interface OrderDetailsProps {
   stage: number;
@@ -82,7 +71,7 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
       color,
       dateFrom: dateFrom?.valueOf(),
       dateTo: dateTo?.valueOf(),
-      rateId: rate.rateTypeId.name,
+      rateId: rate.id,
       price: totalPrice,
       isFullTank,
       isNeedChildChair,
@@ -105,7 +94,7 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
     isRightWheel,
     model.id,
     point.id,
-    rate.rateTypeId.name,
+    rate.id,
     stage,
     totalPrice,
   ]);
@@ -194,7 +183,7 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
       />
       <div className="order-details">
         <label>Ваш заказ:</label>
-        {name ? (
+        {name && (
           <div className="order-details_row">
             <span>Пункт выдачи</span>
             <div />
@@ -203,8 +192,8 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
               <span>{address}</span>
             </div>
           </div>
-        ) : null}
-        {model.name ? (
+        )}
+        {model.name && (
           <div className="order-details_row">
             <span>Модель</span>
             <div />
@@ -212,8 +201,8 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
               <span>{model.name}</span>
             </div>
           </div>
-        ) : null}
-        {color ? (
+        )}
+        {color && (
           <div className="order-details_row">
             <span>Цвет</span>
             <div />
@@ -221,8 +210,8 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
               <span>{color}</span>
             </div>
           </div>
-        ) : null}
-        {rate?.rateTypeId?.name ? (
+        )}
+        {rate?.rateTypeId?.name && (
           <div className="order-details_row">
             <span>Тариф</span>
             <div />
@@ -230,8 +219,8 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
               <span>{rate.rateTypeId.name}</span>
             </div>
           </div>
-        ) : null}
-        {isFullTank ? (
+        )}
+        {isFullTank && (
           <div className="order-details_row">
             <span>Полный бак</span>
             <div />
@@ -239,8 +228,8 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
               <span>Да</span>
             </div>
           </div>
-        ) : null}
-        {isNeedChildChair ? (
+        )}
+        {isNeedChildChair && (
           <div className="order-details_row">
             <span>Детское кресло</span>
             <div />
@@ -248,8 +237,8 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
               <span>Да</span>
             </div>
           </div>
-        ) : null}
-        {isRightWheel ? (
+        )}
+        {isRightWheel && (
           <div className="order-details_row">
             <span>Правый руль</span>
             <div />
@@ -257,8 +246,8 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
               <span>Да</span>
             </div>
           </div>
-        ) : null}
-        {rentTime ? (
+        )}
+        {rentTime && (
           <div className="order-details_row">
             <span>Длительность аренды</span>
             <div />
@@ -266,12 +255,12 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
               <span>{rentTime}</span>
             </div>
           </div>
-        ) : null}
-        {finalPrice ? (
+        )}
+        {finalPrice && (
           <p className={priceClass}>
             <b>Цена:</b> {finalPrice}
           </p>
-        ) : null}
+        )}
         <button
           className={buttonClass}
           onClick={handleNextButtonClick}

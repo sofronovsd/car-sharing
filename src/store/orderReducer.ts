@@ -21,6 +21,7 @@ const initialState: OrderState = {
   isRightWheel: false,
   price: 0,
   rate: {
+    id: "",
     price: 0,
     rateTypeId: {
       name: "",

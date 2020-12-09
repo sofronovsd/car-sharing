@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { ModelState } from "../../store/modelReducer";
 import "./rate-picker.scss";
 import { OrderState } from "../../store/orderReducer";
+import CustomRadio from "../custom-radio/custom-radio";
 
 interface RatePickerProps {
   handleChangeValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -25,20 +26,16 @@ const RatePicker = ({ handleChangeValue }: RatePickerProps) => {
     return rates.map((rate: IRate, index) => {
       const id = `rate${index}`;
       return (
-        <div key={id}>
-          <input
-            type="radio"
-            className="custom-radio"
-            name="rate"
+        <React.Fragment key={id}>
+          <CustomRadio
             id={id}
+            name="rate"
             defaultChecked={
               selectedRate.rateTypeId.name === rate.rateTypeId.name
             }
+            text={`${rate.rateTypeId.name}, ${rate.price}₽/${rate.rateTypeId.unit}`}
           />
-          <label
-            htmlFor={id}
-          >{`${rate.rateTypeId.name}, ${rate.price}₽/${rate.rateTypeId.unit}`}</label>
-        </div>
+        </React.Fragment>
       );
     });
   }, [rates, selectedRate.rateTypeId.name]);

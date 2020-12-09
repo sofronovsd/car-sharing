@@ -21,20 +21,16 @@ import { useDispatch, useSelector } from "react-redux";
 import ICity from "../../store/interfaces/i-city";
 import IPoint from "../../store/interfaces/i-point";
 import "./step-one.scss";
-import { LocationState } from "../../store/locationReducer";
 import { customFilter } from "../../utils/utils";
 import ICar from "../../store/interfaces/i-car";
 import IRateTypeId from "../../store/interfaces/i-rate-type-id";
 import IRate from "../../store/interfaces/i-rate";
-
-interface StepOneState {
-  location: LocationState;
-}
-
-const citiesSelector = (state: StepOneState) => state.location.cities;
-const pointsSelector = (state: StepOneState) => state.location.points;
-const citySelector = (state: StepOneState) => state.location.city;
-const pointSelector = (state: StepOneState) => state.location.point;
+import {
+  citiesSelector,
+  citySelector,
+  pointSelector,
+  pointsSelector,
+} from "../../store/selectors";
 
 const StepOne = () => {
   const cities = useSelector(citiesSelector);

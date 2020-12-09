@@ -13,32 +13,30 @@ import {
   setRightWheel,
 } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { ModelState } from "../../store/modelReducer";
 import ModelGrid from "../model-grid/model-grid";
 import "./step-two.scss";
 import IRate from "../../store/interfaces/i-rate";
 import IRateTypeId from "../../store/interfaces/i-rate-type-id";
-
-interface StepTwoState {
-  model: ModelState;
-}
-
-const carsSelector = (state: StepTwoState) => state.model.cars;
-const carIdSelector = (state: StepTwoState) => state.model.model.id;
-const carSelector = (state: StepTwoState) => state.model.model;
+import {
+  carIdSelector,
+  carsSelector,
+  modelSelector,
+} from "../../store/selectors";
+import ModelOptionEnum from "./model-option-enum";
+import CustomRadio from "../custom-radio/custom-radio";
 
 const StepTwo = () => {
   const cars = useSelector(carsSelector);
   const carId = useSelector(carIdSelector);
-  const storedCar = useSelector(carSelector);
+  const storedCar = useSelector(modelSelector);
   const dispatch = useDispatch();
-  const [modelOption, setModelOption] = useState("");
+  const [modelOption, setModelOption] = useState(ModelOptionEnum.modelOption1);
   const [filteredCars, setFilteredCars] = useState(cars);
-  // const [selectedCar, setSelectedCar] = useState(car);
 
   const handleCardClick = useCallback(
-    (e: React.ChangeEvent<HTMLDivElement>) => {
-      const modelItem = e.target.closest(".model-item");
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      const target = e.target as HTMLDivElement;
+      const modelItem = target.closest(".model-item");
       if (modelItem) {
         const dataId = modelItem.getAttribute("data-id");
         if (!dataId) {
@@ -82,18 +80,18 @@ const StepTwo = () => {
 
   useEffect(() => {
     switch (modelOption) {
-      case "modelOption1": {
+      case ModelOptionEnum.modelOption1: {
         setFilteredCars(cars);
         break;
       }
-      case "modelOption2": {
+      case ModelOptionEnum.modelOption2: {
         const filteredCars = cars.filter(
           (car) => car.categoryId.name === "Эконом"
         );
         setFilteredCars(filteredCars);
         break;
       }
-      case "modelOption3": {
+      case ModelOptionEnum.modelOption3: {
         const filteredCars = cars.filter(
           (car) => car.categoryId.name === "Премиум"
         );
@@ -108,7 +106,7 @@ const StepTwo = () => {
 
   const handleChangeValue = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setModelOption(e.target.id);
+      setModelOption(Number.parseInt(e.target.id));
     },
     []
   );
@@ -123,28 +121,24 @@ const StepTwo = () => {
   return (
     <div className="model-container">
       <div onChange={handleChangeValue}>
-        <input
-          type="radio"
-          className="custom-radio"
+        <CustomRadio
           name="modelType"
-          id="modelOption1"
-          defaultChecked
+          id={ModelOptionEnum.modelOption1.toString()}
+          defaultChecked={true}
+          text="Все модели"
         />
-        <label htmlFor="modelOption1">Все модели</label>
-        <input
-          type="radio"
-          className="custom-radio"
+        <CustomRadio
           name="modelType"
-          id="modelOption2"
+          id={ModelOptionEnum.modelOption2.toString()}
+          defaultChecked={false}
+          text="Эконом"
         />
-        <label htmlFor="modelOption2">Эконом</label>
-        <input
-          type="radio"
-          className="custom-radio"
+        <CustomRadio
           name="modelType"
-          id="modelOption3"
+          id={ModelOptionEnum.modelOption3.toString()}
+          defaultChecked={false}
+          text="Премиум"
         />
-        <label htmlFor="modelOption3">Премиум</label>
       </div>
       <ModelGrid
         filteredCars={filteredCars}
