@@ -1,16 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
-  changeStage,
   fetchCars,
+  rollbackOrder,
   setAvailable,
-  setChildChair,
-  setColor,
-  setDateFrom,
-  setDateTo,
-  setFullTank,
   setModel,
-  setRate,
-  setRightWheel,
 } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import ModelGrid from "../model-grid/model-grid";
@@ -24,6 +17,7 @@ import {
 } from "../../store/selectors";
 import ModelOptionEnum from "./model-option-enum";
 import CustomRadio from "../custom-radio/custom-radio";
+import { OrderState } from "../../store/orderReducer";
 
 const StepTwo = () => {
   const cars = useSelector(carsSelector);
@@ -45,19 +39,21 @@ const StepTwo = () => {
         const car = cars.find((car) => car.id === dataId);
         if (car) {
           if (car.id !== storedCar.id) {
-            dispatch(setColor(""));
-            dispatch(setDateFrom(""));
-            dispatch(setDateTo(""));
-            dispatch(setRightWheel(false));
-            dispatch(setFullTank(false));
-            dispatch(setChildChair(false));
-            dispatch(
-              setRate({
+            const orderRequest = {
+              stage: 2,
+              color: "",
+              dateFrom: undefined,
+              dateTo: undefined,
+              isRightWheel: false,
+              isFullTank: false,
+              isNeedChildChair: false,
+              price: 0,
+              rate: {
                 price: 0,
                 rateTypeId: { name: "", unit: "" } as IRateTypeId,
-              } as IRate)
-            );
-            dispatch(changeStage(2));
+              } as IRate,
+            } as OrderState;
+            dispatch(rollbackOrder(orderRequest));
           }
           dispatch(setModel(car));
         }

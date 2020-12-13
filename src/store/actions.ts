@@ -4,6 +4,7 @@ import {
   FETCH_CITIES,
   FETCH_POINTS,
   FETCH_RATES,
+  ROLLBACK_ORDER,
   SET_AVAILABLE,
   SET_CHILD_CHAIR,
   SET_CITY,
@@ -12,6 +13,7 @@ import {
   SET_DATE_TO,
   SET_FULL_TANK,
   SET_MODEL,
+  SET_ORDER,
   SET_POINT,
   SET_PRICE,
   SET_RATE,
@@ -30,6 +32,7 @@ import IRate from "./interfaces/i-rate";
 import ICity from "./interfaces/i-city";
 import IPoint from "./interfaces/i-point";
 import { Moment } from "moment";
+import { OrderState } from "./orderReducer";
 
 export function setCity(city: ICity | undefined) {
   return {
@@ -56,6 +59,20 @@ export function setPrice(price: number) {
   return {
     type: SET_PRICE,
     payload: price,
+  };
+}
+
+export function setOrder(order: OrderState) {
+  return {
+    type: SET_ORDER,
+    payload: order,
+  };
+}
+
+export function rollbackOrder(order: OrderState) {
+  return {
+    type: ROLLBACK_ORDER,
+    payload: order,
   };
 }
 

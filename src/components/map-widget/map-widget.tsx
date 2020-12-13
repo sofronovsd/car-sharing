@@ -27,7 +27,6 @@ const MapWidget = ({ points }: MapWidgetProps) => {
     );
 
     Promise.all(coordsRequests).then((coordsRequests) => {
-      // @ts-ignore
       setPlaceMarks(coordsRequests);
     });
   }, [city.name, points]);

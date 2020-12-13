@@ -1,11 +1,13 @@
 import {
   CHANGE_STAGE,
+  ROLLBACK_ORDER,
   SET_AVAILABLE,
   SET_CHILD_CHAIR,
   SET_COLOR,
   SET_DATE_FROM,
   SET_DATE_TO,
   SET_FULL_TANK,
+  SET_ORDER,
   SET_PRICE,
   SET_RATE,
   SET_RIGHT_WHEEL,
@@ -100,6 +102,26 @@ const orderReducer = (state: OrderState = initialState, action: IAction) => {
         ...state,
         available: action.payload,
       };
+    }
+    case SET_ORDER: {
+      if (typeof action.payload === "object") {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      } else {
+        return state;
+      }
+    }
+    case ROLLBACK_ORDER: {
+      if (typeof action.payload === "object") {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      } else {
+        return state;
+      }
     }
     case CHANGE_STAGE: {
       if (typeof action.payload === "number") {

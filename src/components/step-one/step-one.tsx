@@ -2,20 +2,13 @@ import { OptionsObject, Typeahead } from "@gforge/react-typeahead-ts";
 import MapWidget from "../map-widget/map-widget";
 import React, { useCallback, useEffect, useState } from "react";
 import {
-  changeStage,
   fetchCities,
   fetchPoints,
+  rollbackOrder,
   setAvailable,
-  setChildChair,
   setCity,
-  setColor,
-  setDateFrom,
-  setDateTo,
-  setFullTank,
   setModel,
   setPoint,
-  setRate,
-  setRightWheel,
 } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import ICity from "../../store/interfaces/i-city";
@@ -31,6 +24,7 @@ import {
   pointSelector,
   pointsSelector,
 } from "../../store/selectors";
+import { OrderState } from "../../store/orderReducer";
 
 const StepOne = () => {
   const cities = useSelector(citiesSelector);
@@ -61,20 +55,22 @@ const StepOne = () => {
   }, [storedCity, points]);
 
   const resetFields = useCallback(() => {
-    dispatch(changeStage(1));
-    dispatch(setModel({ id: "", name: "" } as ICar));
-    dispatch(setColor(""));
-    dispatch(setDateFrom(""));
-    dispatch(setDateTo(""));
-    dispatch(setRightWheel(false));
-    dispatch(setFullTank(false));
-    dispatch(setChildChair(false));
-    dispatch(
-      setRate({
+    const orderRequest = {
+      stage: 1,
+      color: "",
+      dateFrom: undefined,
+      dateTo: undefined,
+      isRightWheel: false,
+      isFullTank: false,
+      isNeedChildChair: false,
+      price: 0,
+      rate: {
         price: 0,
         rateTypeId: { name: "", unit: "" } as IRateTypeId,
-      } as IRate)
-    );
+      } as IRate,
+    } as OrderState;
+    dispatch(setModel({ id: "", name: "" } as ICar));
+    dispatch(rollbackOrder(orderRequest));
   }, [dispatch]);
 
   const changeCity = useCallback(
