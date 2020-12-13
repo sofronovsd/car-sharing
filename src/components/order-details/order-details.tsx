@@ -25,6 +25,7 @@ import {
   rateSelector,
   rightWheelSelector,
 } from "../../store/selectors";
+import OrderDetailsRow from "../order-details-row/OrderDetailsRow";
 
 interface OrderDetailsProps {
   stage: number;
@@ -193,68 +194,18 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
             </div>
           </div>
         )}
-        {model.name && (
-          <div className="order-details_row">
-            <span>Модель</span>
-            <div />
-            <div className="order-details_value">
-              <span>{model.name}</span>
-            </div>
-          </div>
-        )}
-        {color && (
-          <div className="order-details_row">
-            <span>Цвет</span>
-            <div />
-            <div className="order-details_value">
-              <span>{color}</span>
-            </div>
-          </div>
-        )}
+        {model.name && <OrderDetailsRow label="Модель" value={model.name} />}
+        {color && <OrderDetailsRow label="Цвет" value={color} />}
         {rate?.rateTypeId?.name && (
-          <div className="order-details_row">
-            <span>Тариф</span>
-            <div />
-            <div className="order-details_value">
-              <span>{rate.rateTypeId.name}</span>
-            </div>
-          </div>
+          <OrderDetailsRow label="Тариф" value={rate.rateTypeId.name} />
         )}
-        {isFullTank && (
-          <div className="order-details_row">
-            <span>Полный бак</span>
-            <div />
-            <div className="order-details_value">
-              <span>Да</span>
-            </div>
-          </div>
-        )}
+        {isFullTank && <OrderDetailsRow label="Полный бак" value="Да" />}
         {isNeedChildChair && (
-          <div className="order-details_row">
-            <span>Детское кресло</span>
-            <div />
-            <div className="order-details_value">
-              <span>Да</span>
-            </div>
-          </div>
+          <OrderDetailsRow label="Детское кресло" value="Да" />
         )}
-        {isRightWheel && (
-          <div className="order-details_row">
-            <span>Правый руль</span>
-            <div />
-            <div className="order-details_value">
-              <span>Да</span>
-            </div>
-          </div>
-        )}
+        {isRightWheel && <OrderDetailsRow label="Правый руль" value="Да" />}
         {rentTime && (
-          <div className="order-details_row">
-            <span>Длительность аренды</span>
-            <div />
-            <div className="order-details_value">
-              <span>{rentTime}</span>
-            </div>
-          </div>
+          <OrderDetailsRow label="Длительность аренды" value={rentTime} />
         )}
         {finalPrice && (
           <p className={priceClass}>

@@ -10,4 +10,5 @@ export async function requestCoords(geocode: string) {
     );
     return [Number.parseFloat(coords[1]), Number.parseFloat(coords[0])];
   }
+  throw new Error();
 }

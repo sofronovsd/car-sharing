@@ -5,22 +5,10 @@ import "./final-page.scss";
 import OrderDetails from "../../order-details/order-details";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrder, loadCarImage } from "../../../api/api-factory";
-import {
-  setAvailable,
-  setChildChair,
-  setCity,
-  setColor,
-  setDateFrom,
-  setDateTo,
-  setFullTank,
-  setModel,
-  setPoint,
-  setPrice,
-  setRate,
-  setRightWheel,
-} from "../../../store/actions";
+import { setCity, setModel, setOrder, setPoint } from "../../../store/actions";
 import moment from "moment";
 import { modelSelector, orderSelector } from "../../../store/selectors";
+import { OrderState } from "../../../store/orderReducer";
 
 interface FinalPageParams {
   orderId: string;
@@ -43,18 +31,21 @@ const FinalPage = () => {
     if (!order.price) {
       getOrder(orderId).then((res) => {
         const data = res.data;
-        dispatch(setColor(data.color));
-        dispatch(setDateFrom(moment(data.dateFrom)));
-        dispatch(setDateTo(moment(data.dateTo)));
-        dispatch(setFullTank(data.isFullTank));
-        dispatch(setChildChair(data.isNeedChildChair));
-        dispatch(setRightWheel(data.isRightWheel));
-        dispatch(setPrice(data.price));
+        const orderRequest = {
+          price: data.price,
+          color: data.color,
+          dateFrom: moment(data.dateFrom),
+          dateTo: moment(data.dateTo),
+          available: true,
+          isFullTank: data.isFullTank,
+          isNeedChildChair: data.isNeedChildChair,
+          isRightWheel: data.isRightWheel,
+          rate: data.rateId,
+        } as OrderState;
         dispatch(setCity(data.cityId));
         dispatch(setModel(data.carId));
         dispatch(setPoint(data.pointId));
-        dispatch(setRate(data.rateId));
-        dispatch(setAvailable(true));
+        dispatch(setOrder(orderRequest));
       });
     }
   }, [dispatch, orderId]);
@@ -70,14 +61,12 @@ const FinalPage = () => {
           <div className="total-card">
             <h2>Ваш заказ подтверждён</h2>
             <h4>{model.name}</h4>
-            {model.number ? (
-              <div className="model-number">{model.number}</div>
-            ) : null}
-            {order.isFullTank ? (
+            {model.number && <div className="model-number">{model.number}</div>}
+            {order.isFullTank && (
               <p>
                 <b>Топливо</b> 100%
               </p>
-            ) : null}
+            )}
             <p>
               <b>Доступна с</b> {order.dateFrom?.format("DD.MM.YYYY HH:mm")}
             </p>
