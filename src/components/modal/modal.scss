@@ -1,0 +1,47 @@
+@import "src/styles/colors";
+
+.modal-window {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.9);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__hidden {
+    display: none;
+  }
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &_title {
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 2rem;
+  }
+
+  &_button-group {
+    @media screen and (max-width: 320px) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    button:first-child {
+      margin-right: 1rem;
+
+      @media screen and (max-width: 320px) {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}

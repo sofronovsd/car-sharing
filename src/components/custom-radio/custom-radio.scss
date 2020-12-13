@@ -1,36 +1,26 @@
 @import "src/styles/colors";
 
-.model-container {
-  padding: 2rem 4rem;
-
-  @media screen and (max-width: 768px) {
-    padding: 2rem;
-  }
-
-  @media screen and (max-width: 320px) {
-    padding: 1rem 2rem;
-  }
-}
-
-.custom-radio {
+.custom-checkbox {
   position: absolute;
   z-index: -1;
   opacity: 0;
 
-  &:not(:disabled):active+label::before {
+  &:not(:disabled):active + label::before {
     background-color: $primary-accent;
     border-color: $primary-accent;
   }
 
-  &:checked+label {
+  &:checked + label {
     color: $primary-black;
 
     &::before {
-      border: 3px solid $primary-accent;
+      border: 1px solid $primary-accent;
+      display: block;
+      content: url("../../icons/checked.svg");
     }
   }
 
-  +label {
+  + label {
     display: inline-flex;
     align-items: center;
     user-select: none;
@@ -40,16 +30,12 @@
     &::before {
       content: '';
       display: inline-block;
-      width: 1em;
-      height: 1em;
+      width: 12px;
+      height: 12px;
       flex-shrink: 0;
       flex-grow: 0;
       border: 1px solid $gray-dark;
-      border-radius: 50%;
       margin-right: 0.5em;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: 50% 50%;
       box-sizing: border-box;
     }
   }

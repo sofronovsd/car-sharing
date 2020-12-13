@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import OrderPage from "./components/pages/order-page/order-page";
 import BurgerMenu from "./components/burger-menu/burger-menu";
 import Menu from "./components/menu/menu";
+import FinalPage from "./components/pages/final-page/final-page";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -21,8 +22,9 @@ function App() {
         <button className="language-btn">Eng</button>
       </aside>
       <Switch>
-        <Route exact path="/" component={StartPage} />
-        <Route path="/order" component={OrderPage} />
+        <Route exact path="/car-sharing/" component={StartPage} />
+        <Route exact path="/car-sharing/order" component={OrderPage} />
+        <Route path="/car-sharing/order/:orderId" component={FinalPage} />
       </Switch>
     </div>
   );

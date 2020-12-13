@@ -7,7 +7,7 @@ import ICar from "../../store/interfaces/i-car";
 interface ModelGridProps {
   filteredCars: ICar[];
   carId: string;
-  handleCardClick: (e: any) => void;
+  handleCardClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const ModelGrid = ({

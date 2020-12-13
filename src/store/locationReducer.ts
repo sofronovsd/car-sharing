@@ -9,6 +9,7 @@ const initialState: LocationState = {
     id: "",
   },
   point: {
+    id: "",
     name: "",
     address: "",
     cityId: {

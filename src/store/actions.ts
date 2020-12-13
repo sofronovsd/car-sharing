@@ -1,8 +1,11 @@
 import {
+  CHANGE_STAGE,
   FETCH_CARS,
   FETCH_CITIES,
   FETCH_POINTS,
   FETCH_RATES,
+  ROLLBACK_ORDER,
+  SET_AVAILABLE,
   SET_CHILD_CHAIR,
   SET_CITY,
   SET_COLOR,
@@ -10,7 +13,9 @@ import {
   SET_DATE_TO,
   SET_FULL_TANK,
   SET_MODEL,
+  SET_ORDER,
   SET_POINT,
+  SET_PRICE,
   SET_RATE,
   SET_RIGHT_WHEEL,
 } from "./types";
@@ -27,6 +32,7 @@ import IRate from "./interfaces/i-rate";
 import ICity from "./interfaces/i-city";
 import IPoint from "./interfaces/i-point";
 import { Moment } from "moment";
+import { OrderState } from "./orderReducer";
 
 export function setCity(city: ICity | undefined) {
   return {
@@ -46,6 +52,27 @@ export function setColor(color: string) {
   return {
     type: SET_COLOR,
     payload: color,
+  };
+}
+
+export function setPrice(price: number) {
+  return {
+    type: SET_PRICE,
+    payload: price,
+  };
+}
+
+export function setOrder(order: OrderState) {
+  return {
+    type: SET_ORDER,
+    payload: order,
+  };
+}
+
+export function rollbackOrder(order: OrderState) {
+  return {
+    type: ROLLBACK_ORDER,
+    payload: order,
   };
 }
 
@@ -91,6 +118,20 @@ export function setDateTo(value: string | Moment) {
   };
 }
 
+export function changeStage(value: number) {
+  return {
+    type: CHANGE_STAGE,
+    payload: value,
+  };
+}
+
+export function setAvailable(value: boolean) {
+  return {
+    type: SET_AVAILABLE,
+    payload: value,
+  };
+}
+
 export function fetchCities() {
   return async (dispatch: Dispatch<IAction>) => {
     const response = await loadCities();
@@ -119,7 +160,7 @@ export function fetchRates() {
   };
 }
 
-export function setModel(car: ICar) {
+export function setModel(car: ICar | undefined) {
   return {
     type: SET_MODEL,
     payload: car,
