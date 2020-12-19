@@ -1,0 +1,30 @@
+.custom-input {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 10.5px;
+    line-height: 12px;
+    letter-spacing: -0.18421px;
+    color: #495057;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    height: 29px;
+    border: 0.5px solid #BECAD6;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    padding: 0 11.5px;
+    color: #3D5170;
+
+    &:active {
+      border: 1px solid #007BFF;
+    }
+
+    &:focus {
+      border: 1px solid #007BFF;
+      outline: none;
+    }
+  }
+}

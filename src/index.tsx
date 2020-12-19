@@ -3,15 +3,19 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import AdminPage from "./components/pages/admin-page/admin-page";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <Switch>
+          <Route path="/car-sharing/admin/" component={AdminPage} />
+          <Route path="/car-sharing/" component={App} />
+        </Switch>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
