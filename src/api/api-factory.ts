@@ -1,7 +1,13 @@
+import { Base64 } from "js-base64";
+
 const baseUrl = "http://api-factory.simbirsoft1.com";
+const authUrl = "http://api-factory.simbirsoft1.com/api/auth/";
 const dbUrl = "http://api-factory.simbirsoft1.com/api/db/";
 const corsUrl = "https://cors-anywhere.herokuapp.com/";
 const headers = {
+  "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+};
+const authorizationHeaders = {
   "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
 };
 const getInit = {
@@ -66,6 +72,41 @@ export async function makeOrder(request: any) {
 
 export async function getOrder(id: string) {
   const response = await fetch(`${corsUrl}${dbUrl}order/${id}`, getInit);
+
+  if (response.ok) {
+    return response.json();
+  }
+}
+
+export async function login(login: string, password: string) {
+  const response = await fetch(`${corsUrl}${authUrl}login`, {
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json;charset=utf-8",
+      Authorization: `Basic ${Base64.encode(
+        `${Math.random().toString(36).substr(2, 7)}:${Math.random()
+          .toString(36)
+          .substr(2, 7)}`
+      )}`,
+    },
+    body: JSON.stringify({ login, password }),
+  });
+
+  if (response.ok) {
+    return response.json();
+  }
+}
+
+export async function register(login: string, password: string) {
+  const response = await fetch(`${corsUrl}${authUrl}register`, {
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify({ login, password }),
+  });
 
   if (response.ok) {
     return response.json();
