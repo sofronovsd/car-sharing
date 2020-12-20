@@ -20,7 +20,7 @@ const LoginPage = () => {
     <div className="login-page_container">
       <div className="login-page">
         <div className="login-page_header">
-          <img src="../assets/logo.png" alt="logo" />
+          <img src="../assets/logo.svg" alt="logo" />
           <h3>Need for drive</h3>
         </div>
         <div className="dialog">

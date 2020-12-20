@@ -1,0 +1,120 @@
+.admin-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  box-shadow: inset 0px -1px 0px #E1E5EB;
+
+  &:active {
+    box-shadow: inset 0px -1px 0px #E1E5EB, inset 4px 0px 0px #007BFF;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    h4 {
+      color: #007BFF;
+    }
+
+    .auto {
+      background-image: url("../../icons/admin-menu-icon-1-blue.svg");
+    }
+
+    .auto-list {
+      background-image: url("../../icons/admin-menu-icon-2-blue.svg");
+    }
+
+    .order {
+      background-image: url("../../icons/admin-menu-icon-3-blue.svg");
+    }
+
+    .menu4 {
+      background-image: url("../../icons/admin-menu-icon-4-blue.svg");
+    }
+
+    .menu5 {
+      background-image: url("../../icons/admin-menu-icon-5-blue.svg");
+    }
+
+    .menu6 {
+      background-image: url("../../icons/admin-menu-icon-6-blue.svg");
+    }
+
+    .menu7 {
+      background-image: url("../../icons/admin-menu-icon-7-blue.svg");
+    }
+  }
+
+  h4 {
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 17px;
+    letter-spacing: -0.234375px;
+
+    color: #3D5170;
+  }
+
+  span {
+    transform: scale(1.4);
+    display: block;
+    width: 14px;
+    height: 14px;
+    margin-right: 11px;
+    background: no-repeat center;
+  }
+
+  .auto {
+    background-image: url("../../icons/admin-menu-icon-1.svg");
+
+    &:hover {
+      background-image: url("../../icons/admin-menu-icon-1-blue.svg");
+    }
+  }
+
+  .auto-list {
+    background-image: url("../../icons/admin-menu-icon-2.svg");
+
+    &:hover {
+      background-image: url("../../icons/admin-menu-icon-2-blue.svg");
+    }
+  }
+
+  .order {
+    background-image: url("../../icons/admin-menu-icon-3.svg");
+
+    &:hover {
+      background-image: url("../../icons/admin-menu-icon-3-blue.svg");
+    }
+  }
+
+  .menu4 {
+    background-image: url("../../icons/admin-menu-icon-4.svg");
+
+    &:hover {
+      background-image: url("../../icons/admin-menu-icon-4-blue.svg");
+    }
+  }
+
+  .menu5 {
+    background-image: url("../../icons/admin-menu-icon-5.svg");
+
+    &:hover {
+      background-image: url("../../icons/admin-menu-icon-5-blue.svg");
+    }
+  }
+
+  .menu6 {
+    background-image: url("../../icons/admin-menu-icon-6.svg");
+
+    &:hover {
+      background-image: url("../../icons/admin-menu-icon-6-blue.svg");
+    }
+  }
+
+  .menu7 {
+    background-image: url("../../icons/admin-menu-icon-7.svg");
+
+    &:hover {
+      background-image: url("../../icons/admin-menu-icon-7-blue.svg");
+    }
+  }
+}
