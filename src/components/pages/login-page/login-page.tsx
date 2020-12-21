@@ -20,7 +20,7 @@ const LoginPage = () => {
 
   const handleLogin = useCallback(() => {
     if (mail && password) {
-      register(mail, password).then((res) => console.log("res", res));
+      login(mail, password).then((res) => console.log("res", res));
     }
   }, [mail, password]);
   return (
