@@ -16,7 +16,11 @@ const AdminInterfacePage = () => {
         <AdminMenu />
       </aside>
       <main className="admin-interface_main">
-        <header>Поиск</header>
+        <header>
+          <span>
+            <input type="text" placeholder="Поиск ..." />
+          </span>
+        </header>
         <Switch>
           <Route
             exact
@@ -24,7 +28,13 @@ const AdminInterfacePage = () => {
             component={AdminOrdersPage}
           />
         </Switch>
-        <footer>Copyright © 2020 Simbirsoft</footer>
+        <footer>
+          <div>
+            <a>Главная страница</a>
+            <a>Ссылка</a>
+          </div>
+          <span>Copyright © 2020 Simbirsoft</span>
+        </footer>
       </main>
     </div>
   );

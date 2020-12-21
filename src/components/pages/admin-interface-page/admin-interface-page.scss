@@ -4,6 +4,7 @@
     margin: 0 auto;
     height: 100vh;
     overflow: hidden;
+    background: #F5F6F8;
 
     display: grid;
     grid-template-columns: 285px 1fr;
@@ -21,6 +22,65 @@
     display: flex;
     flex-direction: column;
 
+    header {
+      height: 67.5px;
+      background: #FFFFFF;
+      box-shadow: 0 2.5px 9.5px rgba(90, 97, 105, 0.12);
+      display: flex;
+      align-items: center;
+      padding-left: 2rem;
+
+      span {
+        position: relative;
+        &::before {
+          content: url('../../../icons/search.svg');
+          position: absolute;
+          top: 2px;
+        }
+      }
+
+      input {
+        border: none;
+        padding-left: 1.5rem;
+        font-size: 13px;
+        line-height: 15px;
+        letter-spacing: -0.0928572px;
+        color: #767F9D;
+      }
+    }
+
+    footer {
+      height: 67.5px;
+      background: #FFFFFF;
+      box-shadow: 0 -0.5px 0 #D7DAE3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+
+      div {
+        a {
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 16px;
+          color: #007BFF;
+          cursor: pointer;
+        }
+
+        a:first-child {
+          margin-right: 1rem;
+        }
+      }
+
+      span {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: right;
+        color: #818EA3;
+      }
+    }
+
     header + div {
       flex-grow: 1;
     }
@@ -32,6 +92,8 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 1px 75px rgba(90, 97, 105, 0.11), 0 2px 4px rgba(90, 97, 105, 0.12), 0 7.5px 11px rgba(90, 97, 105, 0.1), 0 3.5px 17.5px rgba(165, 182, 201, 0.1);
+  background: white;
+  z-index: 1;
 
   &_header {
     display: flex;
