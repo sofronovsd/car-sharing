@@ -7,9 +7,6 @@ const corsUrl = "https://cors-anywhere.herokuapp.com/";
 const headers = {
   "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
 };
-const authorizationHeaders = {
-  "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
-};
 const getInit = {
   method: "GET",
   headers,
@@ -78,19 +75,17 @@ export async function getOrder(id: string) {
   }
 }
 
-export async function login(login: string, password: string) {
+export async function login(username: string, password: string) {
   const response = await fetch(`${authUrl}login`, {
     method: "POST",
     headers: {
       ...headers,
       "Content-Type": "application/json;charset=utf-8",
       Authorization: `Basic ${Base64.encode(
-        `${Math.random().toString(36).substr(2, 7)}:${Math.random()
-          .toString(36)
-          .substr(2, 7)}`
+        `${Math.random().toString(36).substr(2, 7)}:4cbcea96de`
       )}`,
     },
-    body: JSON.stringify({ login, password }),
+    body: JSON.stringify({ username, password }),
   });
 
   if (response.ok) {
