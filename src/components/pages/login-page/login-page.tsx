@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useCallback, useState } from "react";
 import "./login-page.scss";
 import CustomInput from "../../admin/custom-input/custom-input";
+import { login, register } from "../../../api/api-factory";
 
 const LoginPage = () => {
   const [mail, setMail] = useState("");
@@ -16,6 +17,12 @@ const LoginPage = () => {
     },
     []
   );
+
+  const handleLogin = useCallback(() => {
+    if (mail && password) {
+      login(mail, password).then((res) => console.log("res", res));
+    }
+  }, [mail, password]);
   return (
     <div className="login-page_container">
       <div className="login-page">
@@ -41,7 +48,9 @@ const LoginPage = () => {
           </form>
           <div className="dialog_button-group">
             <a>Запросить доступ</a>
-            <button className="button">Войти</button>
+            <button className="button" onClick={handleLogin}>
+              Войти
+            </button>
           </div>
         </div>
       </div>
