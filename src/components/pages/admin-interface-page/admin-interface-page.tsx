@@ -30,8 +30,8 @@ const AdminInterfacePage = () => {
         </Switch>
         <footer>
           <div>
-            <a>Главная страница</a>
-            <a>Ссылка</a>
+            <a href="#">Главная страница</a>
+            <a href="#">Ссылка</a>
           </div>
           <span>Copyright © 2020 Simbirsoft</span>
         </footer>

@@ -1,11 +1,13 @@
 import { ModelState } from "./modelReducer";
 import { OrderState } from "./orderReducer";
 import { LocationState } from "./locationReducer";
+import { AuthState } from "./authReducer";
 
 interface SelectorsState {
   model: ModelState;
   order: OrderState;
   location: LocationState;
+  auth: AuthState;
 }
 
 export const modelSelector = (state: SelectorsState) => state.model.model;
@@ -34,3 +36,5 @@ export const carsSelector = (state: SelectorsState) => state.model.cars;
 export const carIdSelector = (state: SelectorsState) => state.model.model.id;
 export const ratesSelector = (state: SelectorsState) => state.model.rates;
 export const orderSelector = (state: SelectorsState) => state.order;
+export const authenticatedSelector = (state: SelectorsState) =>
+  state.auth.isAuthenticated;

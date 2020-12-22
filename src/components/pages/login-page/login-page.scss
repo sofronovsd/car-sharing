@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   margin-top: 10%;
+  width: 100%;
+  max-width: 376.5px;
 
   &_container {
     width: 100%;
@@ -28,7 +30,7 @@
 }
 
 .dialog {
-  width: 376.5px;
+  width: 100%;
   background: #FFFFFF;
   box-shadow: 0 1px 0 rgba(90, 97, 105, 0.11), 0 2px 4px rgba(90, 97, 105, 0.12), 0 5px 5px rgba(90, 97, 105, 0.06), 0 3.5px 35px rgba(90, 97, 105, 0.1);
   border-radius: 9px;

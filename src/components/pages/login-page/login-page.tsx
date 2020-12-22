@@ -1,11 +1,17 @@
 import React, { ChangeEvent, useCallback, useState } from "react";
 import "./login-page.scss";
 import CustomInput from "../../admin/custom-input/custom-input";
-import { login, register } from "../../../api/api-factory";
+import { login } from "../../../api/api-factory";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authenticate } from "../../../store/actions";
+import { AuthState } from "../../../store/authReducer";
 
 const LoginPage = () => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleMailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setMail(e.target.value);
@@ -20,9 +26,20 @@ const LoginPage = () => {
 
   const handleLogin = useCallback(() => {
     if (mail && password) {
-      login(mail, password).then((res) => console.log("res", res));
+      login(mail, password).then((res) => {
+        const newAuth = {
+          accessToken: res.access_token,
+          userId: res.user_id,
+          tokenType: res.token_type,
+          refreshToken: res.refresh_token,
+          expiresIn: res.expires_in,
+          isAuthenticated: true,
+        } as AuthState;
+        dispatch(authenticate(newAuth));
+        history.push(`/car-sharing/admin/orders`);
+      });
     }
-  }, [mail, password]);
+  }, [dispatch, history, mail, password]);
   return (
     <div className="login-page_container">
       <div className="login-page">
@@ -47,7 +64,7 @@ const LoginPage = () => {
             />
           </form>
           <div className="dialog_button-group">
-            <a>Запросить доступ</a>
+            <a href="#">Запросить доступ</a>
             <button className="button" onClick={handleLogin}>
               Войти
             </button>
