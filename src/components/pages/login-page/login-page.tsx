@@ -6,12 +6,14 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authenticate } from "../../../store/actions";
 import { AuthState } from "../../../store/authReducer";
+import { useAlert } from "react-alert";
 
 const LoginPage = () => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
+  const alert = useAlert();
 
   const handleMailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setMail(e.target.value);
@@ -26,20 +28,24 @@ const LoginPage = () => {
 
   const handleLogin = useCallback(() => {
     if (mail && password) {
-      login(mail, password).then((res) => {
-        const newAuth = {
-          accessToken: res.access_token,
-          userId: res.user_id,
-          tokenType: res.token_type,
-          refreshToken: res.refresh_token,
-          expiresIn: res.expires_in,
-          isAuthenticated: true,
-        } as AuthState;
-        dispatch(authenticate(newAuth));
-        history.push(`/car-sharing/admin/orders`);
-      });
+      login(mail, password)
+        .then((res) => {
+          const newAuth = {
+            accessToken: res.access_token,
+            userId: res.user_id,
+            tokenType: res.token_type,
+            refreshToken: res.refresh_token,
+            expiresIn: res.expires_in,
+            isAuthenticated: true,
+          } as AuthState;
+          dispatch(authenticate(newAuth));
+          history.push(`/car-sharing/admin/orders`);
+        })
+        .catch(() => {
+          alert.show("Ошибка входа");
+        });
     }
-  }, [dispatch, history, mail, password]);
+  }, [alert, dispatch, history, mail, password]);
   return (
     <div className="login-page_container">
       <div className="login-page">
