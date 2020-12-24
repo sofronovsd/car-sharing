@@ -81,7 +81,7 @@ const OrderDetails = ({ stage }: OrderDetailsProps) => {
     makeOrder(request).then((res) => {
       setHidden((prev) => !prev);
       dispatch(changeStage(stage + 1));
-      history.push(`/car-sharing/order/${res.data.id}`);
+      history.push(`/order/${res.data.id}`);
     });
   }, [
     city.id,

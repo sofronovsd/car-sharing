@@ -22,11 +22,7 @@ const AdminInterfacePage = () => {
           </span>
         </header>
         <Switch>
-          <Route
-            exact
-            path="/car-sharing/admin/orders"
-            component={AdminOrdersPage}
-          />
+          <Route exact path="/admin/orders" component={AdminOrdersPage} />
         </Switch>
         <footer>
           <div>

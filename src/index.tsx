@@ -21,10 +21,10 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <AlertProvider template={AlertTemplate} {...options}>
-        <BrowserRouter>
+        <BrowserRouter basename="/car-sharing">
           <Switch>
-            <Route path="/car-sharing/admin/" component={AdminPage} />
-            <Route path="/car-sharing/" component={App} />
+            <Route path="/admin/" component={AdminPage} />
+            <Route path="/" component={App} />
           </Switch>
         </BrowserRouter>
       </AlertProvider>

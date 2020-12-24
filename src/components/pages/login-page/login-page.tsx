@@ -39,7 +39,7 @@ const LoginPage = () => {
             isAuthenticated: true,
           } as AuthState;
           dispatch(authenticate(newAuth));
-          history.push(`/car-sharing/admin/orders`);
+          history.push(`/admin/orders`);
         })
         .catch(() => {
           alert.show("Ошибка входа");
@@ -71,7 +71,7 @@ const LoginPage = () => {
           </form>
           <div className="dialog_button-group">
             <a href="#">Запросить доступ</a>
-            <button className="button" onClick={handleLogin}>
+            <button className="button-adm" onClick={handleLogin}>
               Войти
             </button>
           </div>

@@ -76,7 +76,7 @@ export async function getOrder(id: string) {
 }
 
 export async function login(username: string, password: string) {
-  const response = await fetch(`${authUrl}login`, {
+  const response = await fetch(`${corsUrl}${authUrl}login`, {
     method: "POST",
     headers: {
       ...headers,

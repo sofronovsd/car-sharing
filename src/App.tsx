@@ -22,9 +22,9 @@ function App() {
         <button className="language-btn">Eng</button>
       </aside>
       <Switch>
-        <Route exact path="/car-sharing" component={StartPage} />
-        <Route exact path="/car-sharing/order" component={OrderPage} />
-        <Route exact path="/car-sharing/order/:orderId" component={FinalPage} />
+        <Route exact path="/" component={StartPage} />
+        <Route exact path="/order" component={OrderPage} />
+        <Route exact path="/order/:orderId" component={FinalPage} />
       </Switch>
     </div>
   );

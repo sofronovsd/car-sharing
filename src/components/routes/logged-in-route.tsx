@@ -13,7 +13,7 @@ const LoggedInRoute = ({ component: Component }: LoggedInRouteProps) => {
   const history = useHistory();
   const isAuthenticated = useSelector(authenticatedSelector);
   if (!isAuthenticated) {
-    history.push(`/car-sharing/admin/login`);
+    history.push(`/admin/login`);
   }
   return <Route render={(otherProps) => <Component {...otherProps} />} />;
 };
