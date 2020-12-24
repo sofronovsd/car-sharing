@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/car-sharing/static/css/main.c02fc0bc.chunk.css",
-    "main.js": "/car-sharing/static/js/main.bb1939b6.chunk.js",
-    "main.js.map": "/car-sharing/static/js/main.bb1939b6.chunk.js.map",
+    "main.css": "/car-sharing/static/css/main.4f2e0477.chunk.css",
+    "main.js": "/car-sharing/static/js/main.140ed963.chunk.js",
+    "main.js.map": "/car-sharing/static/js/main.140ed963.chunk.js.map",
     "runtime-main.js": "/car-sharing/static/js/runtime-main.e32721aa.js",
     "runtime-main.js.map": "/car-sharing/static/js/runtime-main.e32721aa.js.map",
     "static/css/2.9f057730.chunk.css": "/car-sharing/static/css/2.9f057730.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.8a1b7ebe.chunk.js.map": "/car-sharing/static/js/3.8a1b7ebe.chunk.js.map",
     "index.html": "/car-sharing/index.html",
     "static/css/2.9f057730.chunk.css.map": "/car-sharing/static/css/2.9f057730.chunk.css.map",
-    "static/css/main.c02fc0bc.chunk.css.map": "/car-sharing/static/css/main.c02fc0bc.chunk.css.map",
+    "static/css/main.4f2e0477.chunk.css.map": "/car-sharing/static/css/main.4f2e0477.chunk.css.map",
     "static/js/2.f80ab2ce.chunk.js.LICENSE.txt": "/car-sharing/static/js/2.f80ab2ce.chunk.js.LICENSE.txt",
     "static/media/menu.scss": "/car-sharing/static/media/Telegram_white.09f73cfe.svg",
     "static/media/admin-menu-item.scss": "/car-sharing/static/media/admin-menu-icon-7.08eae30a.svg",
@@ -26,7 +26,7 @@
     "static/js/runtime-main.e32721aa.js",
     "static/css/2.9f057730.chunk.css",
     "static/js/2.f80ab2ce.chunk.js",
-    "static/css/main.c02fc0bc.chunk.css",
-    "static/js/main.bb1939b6.chunk.js"
+    "static/css/main.4f2e0477.chunk.css",
+    "static/js/main.140ed963.chunk.js"
   ]
 }
