@@ -75,6 +75,17 @@ export async function getOrder(id: string) {
   }
 }
 
+export async function getOrders(token: string) {
+  const response = await fetch(`${corsUrl}${dbUrl}order?page=1&limit=5`, {
+    method: "GET",
+    headers: { ...headers, Authorization: `Bearer ${token}` },
+  });
+
+  if (response.ok) {
+    return response.json();
+  }
+}
+
 export async function login(username: string, password: string) {
   const response = await fetch(`${corsUrl}${authUrl}login`, {
     method: "POST",

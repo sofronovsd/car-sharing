@@ -19,8 +19,8 @@
   }
 
   &_main {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 67.5px 1fr 67.5px;
 
     header {
       height: 67.5px;
