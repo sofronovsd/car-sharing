@@ -75,11 +75,14 @@ export async function getOrder(id: string) {
   }
 }
 
-export async function getOrders(token: string) {
-  const response = await fetch(`${corsUrl}${dbUrl}order?page=1&limit=5`, {
-    method: "GET",
-    headers: { ...headers, Authorization: `Bearer ${token}` },
-  });
+export async function getOrders(token: string, limit: number, page: number) {
+  const response = await fetch(
+    `${corsUrl}${dbUrl}order?page=${page}&limit=${limit}`,
+    {
+      method: "GET",
+      headers: { ...headers, Authorization: `Bearer ${token}` },
+    }
+  );
 
   if (response.ok) {
     return response.json();

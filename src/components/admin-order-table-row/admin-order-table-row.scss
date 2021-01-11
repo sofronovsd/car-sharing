@@ -33,8 +33,58 @@
 
   &_button-group {
     display: flex;
-    border-radius: 5px;
-    border: 1px solid #999999;
+
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    letter-spacing: -0.345714px;
+
+    color: #5A6169;
+
+    button {
+      width: 77px;
+      height: 24px;
+      background: #FFFFFF;
+      box-sizing: border-box;
+      border: 0.5px solid #BECAD6;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover {
+        cursor: pointer;
+        filter: brightness(80%);
+      }
+
+      .check {
+        &::before {
+          content: url("../../icons/Check Icon.svg");
+        }
+      }
+
+      .reject {
+        &::before {
+          content: url("../../icons/Reject Icon.svg");
+        }
+      }
+
+      .edit {
+        &::before {
+          content: url("../../icons/Edit Icon.svg");
+        }
+      }
+    }
+
+    button:first-child {
+      border-right: none;
+      border-radius: 4px 0 0 4px;
+    }
+
+    button:last-child {
+      border-left: none;
+      border-radius: 0 4px 4px 0;
+    }
   }
 
   &_info {

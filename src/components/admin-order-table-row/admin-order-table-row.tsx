@@ -12,10 +12,12 @@ interface AdminOrderTableRowProps {
 const AdminOrderTableRow = ({ order }: AdminOrderTableRowProps) => {
   const [imgSrc, setImgSrc] = useState("");
   useEffect(() => {
-    loadCarImage(order.carId.thumbnail.path).then((blob) => {
-      setImgSrc(URL.createObjectURL(blob));
-    });
-  }, [order.carId.thumbnail.path]);
+    if (order.carId) {
+      loadCarImage(order.carId.thumbnail.path).then((blob) => {
+        setImgSrc(URL.createObjectURL(blob));
+      });
+    }
+  }, [order.carId]);
   return (
     <div className="admin-order-table-row">
       <div className="admin-order-table-row_column">
@@ -67,9 +69,15 @@ const AdminOrderTableRow = ({ order }: AdminOrderTableRowProps) => {
       </div>
       <div className="admin-order-table-row_column">
         <div className="admin-order-table-row_button-group">
-          <button>Готово</button>
-          <button>Отмена</button>
-          <button>Изменить</button>
+          <button>
+            <span className="check">Готово</span>
+          </button>
+          <button>
+            <span className="reject">Отмена</span>
+          </button>
+          <button>
+            <span className="edit">Изменить</span>
+          </button>
         </div>
       </div>
     </div>
