@@ -4,6 +4,7 @@ import AdminOrdersPage from "../admin-orders-page/admin-orders-page";
 
 import "./admin-interface-page.scss";
 import AdminMenu from "../../admin-menu/admin-menu";
+import AdminErrorPage from "../admin-error-page/admin-error-page";
 
 const AdminInterfacePage = () => {
   return (
@@ -23,6 +24,7 @@ const AdminInterfacePage = () => {
         </header>
         <Switch>
           <Route exact path="/admin/orders" component={AdminOrdersPage} />
+          <Route path="/admin/error" component={AdminErrorPage} />
         </Switch>
         <footer>
           <div>

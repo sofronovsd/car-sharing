@@ -8,7 +8,7 @@ import LoggedInRoute from "../../routes/logged-in-route";
 const AdminPage = () => {
   return (
     <Switch>
-      <Route exact path="/admin/login" component={LoginPage} />
+      <Route path="/admin/login" component={LoginPage} />
       <LoggedInRoute path="/admin" component={AdminInterfacePage} />
     </Switch>
   );
