@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./admin-orders-page.scss";
-import { useSelector } from "react-redux";
-import { getOrders } from "../../../api/api-factory";
-import { accessTokenSelector } from "../../../store/selectors";
 import AdminOrdersTable from "../../admin-orders-table/admin-orders-table";
-import IOrder from "../../../store/interfaces/i-order";
 
 const AdminOrdersPage = () => {
   return (

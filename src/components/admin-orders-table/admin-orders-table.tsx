@@ -17,7 +17,6 @@ const AdminOrdersTable = () => {
 
   useEffect(() => {
     getOrders(accessToken, limit, currentPage).then((res) => {
-      console.log("res", res);
       setOrders(res.data);
       setTotalRecords(res.count);
     });

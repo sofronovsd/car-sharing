@@ -18,6 +18,10 @@
     padding: 0 11.5px;
     color: #3D5170;
 
+    &.error {
+      border-color: red;
+    }
+
     &:active {
       border: 1px solid #007BFF;
     }
