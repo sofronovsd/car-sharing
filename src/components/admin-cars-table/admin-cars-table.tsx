@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
-import IOrder from "../../store/interfaces/i-order";
-import "./admin-orders-table.scss";
-import AdminOrderTableRow from "../admin-order-table-row/admin-order-table-row";
-import Pagination from "../pagination/pagination";
+import "./admin-cars-table.scss";
 import { useSelector } from "react-redux";
 import { accessTokenSelector } from "../../store/selectors";
-import { getOrders } from "../../api/api-factory";
+import { getCars } from "../../api/api-factory";
+import ICar from "../../store/interfaces/i-car";
+import Pagination from "../pagination/pagination";
 import { useHistory } from "react-router-dom";
 
 const limit = 5;
 
-const AdminOrdersTable = () => {
+const AdminCarsTable = () => {
   const accessToken = useSelector(accessTokenSelector);
-  const [orders, setOrders] = useState([] as IOrder[]);
+  const [cars, setCars] = useState([] as ICar[]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalRecords, setTotalRecords] = useState(0);
   const history = useHistory();
 
   useEffect(() => {
-    getOrders(accessToken, limit, currentPage)
+    getCars(accessToken, limit, currentPage)
       .then((res) => {
-        setOrders(res.data);
+        setCars(res.data);
         setTotalRecords(res.count);
       })
       .catch(() => {
@@ -29,9 +28,20 @@ const AdminOrdersTable = () => {
   }, [accessToken, currentPage, history]);
 
   return (
-    <div className="admin-orders-table">
-      {orders.map((order) => {
-        return <AdminOrderTableRow order={order} />;
+    <div className="admin-table">
+      <div className="admin-table_row admin-table_row__headers">
+        <div>Название</div>
+        <div>Минимальная цена</div>
+        <div>Максимальная цена</div>
+      </div>
+      {cars.map((car) => {
+        return (
+          <div className="admin-table_row">
+            <div>{car.name}</div>
+            <div>{car.priceMin}</div>
+            <div>{car.priceMax}</div>
+          </div>
+        );
       })}
       <Pagination
         totalRecords={totalRecords}
@@ -44,4 +54,4 @@ const AdminOrdersTable = () => {
   );
 };
 
-export default AdminOrdersTable;
+export default AdminCarsTable;

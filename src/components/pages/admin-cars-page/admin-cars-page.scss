@@ -1,0 +1,30 @@
+.admin-page {
+
+  &_container {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    overflow: hidden;
+  }
+
+  &_header {
+    font-weight: normal;
+    font-size: 29px;
+    line-height: 33px;
+    letter-spacing: -0.725px;
+    color: #3D5170;
+    margin-bottom: 2rem;
+  }
+
+  &_card {
+    padding: 1rem 0;
+    background: #FFFFFF;
+    box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11), 0 4px 8px rgba(90, 97, 105, 0.12), 0 10px 10px rgba(90, 97, 105, 0.06), 0 7px 70px rgba(90, 97, 105, 0.1);
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    max-height: content-box;
+  }
+
+
+}

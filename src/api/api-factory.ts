@@ -89,6 +89,20 @@ export async function getOrders(token: string, limit: number, page: number) {
   }
 }
 
+export async function getCars(token: string, limit: number, page: number) {
+  const response = await fetch(
+    `${corsUrl}${dbUrl}car?page=${page}&limit=${limit}`,
+    {
+      method: "GET",
+      headers: { ...headers, Authorization: `Bearer ${token}` },
+    }
+  );
+
+  if (response.ok) {
+    return response.json();
+  }
+}
+
 export async function login(username: string, password: string) {
   const response = await fetch(`${corsUrl}${authUrl}login`, {
     method: "POST",
