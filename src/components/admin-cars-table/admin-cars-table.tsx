@@ -20,7 +20,6 @@ const AdminCarsTable = () => {
     (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       const target = event.target as HTMLDivElement;
       const carRow = target.closest(".admin-table_row");
-      console.log("carRow?.id", carRow?.id);
 
       history.push(`/admin/cars/${carRow?.id}`);
     },

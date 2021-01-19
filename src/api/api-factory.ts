@@ -1,19 +1,23 @@
 import { Base64 } from "js-base64";
 
 const baseUrl = "http://api-factory.simbirsoft1.com";
-const authUrl = "http://api-factory.simbirsoft1.com/api/auth/";
-const dbUrl = "http://api-factory.simbirsoft1.com/api/db/";
+const authUrl = baseUrl + "/api/auth/";
+const dbUrl = baseUrl + "/api/db/";
 const corsUrl = "https://cors-anywhere.herokuapp.com/";
-const headers = {
+const getHeaders = {
   "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+};
+const postHeaders = {
+  ...getHeaders,
+  "Content-Type": "application/json;charset=utf-8",
 };
 const getInit = {
   method: "GET",
-  headers,
+  headers: getHeaders,
 };
 const postInit = {
   method: "POST",
-  headers: { ...headers, "Content-Type": "application/json;charset=utf-8" },
+  headers: postHeaders,
 };
 
 export async function loadCities() {
@@ -80,7 +84,7 @@ export async function getOrders(token: string, limit: number, page: number) {
     `${corsUrl}${dbUrl}order?page=${page}&limit=${limit}`,
     {
       method: "GET",
-      headers: { ...headers, Authorization: `Bearer ${token}` },
+      headers: { ...getHeaders, Authorization: `Bearer ${token}` },
     }
   );
 
@@ -94,7 +98,7 @@ export async function getCars(token: string, limit: number, page: number) {
     `${corsUrl}${dbUrl}car?page=${page}&limit=${limit}`,
     {
       method: "GET",
-      headers: { ...headers, Authorization: `Bearer ${token}` },
+      headers: { ...getHeaders, Authorization: `Bearer ${token}` },
     }
   );
 
@@ -106,7 +110,7 @@ export async function getCars(token: string, limit: number, page: number) {
 export async function getCarById(token: string, carId: string) {
   const response = await fetch(`${corsUrl}${dbUrl}car/${carId}`, {
     method: "GET",
-    headers: { ...headers, Authorization: `Bearer ${token}` },
+    headers: { ...getHeaders, Authorization: `Bearer ${token}` },
   });
 
   if (response.ok) {
@@ -123,9 +127,8 @@ export async function editCarById(
   const response = await fetch(`${corsUrl}${dbUrl}car/${carId}`, {
     method: "PUT",
     headers: {
-      ...headers,
+      ...postHeaders,
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({
       name,
@@ -142,7 +145,7 @@ export async function removeCarById(token: string, carId: string) {
   const response = await fetch(`${corsUrl}${dbUrl}car/${carId}`, {
     method: "DELETE",
     headers: {
-      ...headers,
+      ...getHeaders,
       Authorization: `Bearer ${token}`,
     },
   });
@@ -157,7 +160,7 @@ export async function getCities(token: string, limit: number, page: number) {
     `${corsUrl}${dbUrl}city?page=${page}&limit=${limit}`,
     {
       method: "GET",
-      headers: { ...headers, Authorization: `Bearer ${token}` },
+      headers: { ...getHeaders, Authorization: `Bearer ${token}` },
     }
   );
 
@@ -170,8 +173,7 @@ export async function login(username: string, password: string) {
   const response = await fetch(`${corsUrl}${authUrl}login`, {
     method: "POST",
     headers: {
-      ...headers,
-      "Content-Type": "application/json;charset=utf-8",
+      ...postHeaders,
       Authorization: `Basic ${Base64.encode(
         `${Math.random().toString(36).substr(2, 7)}:4cbcea96de`
       )}`,
@@ -188,8 +190,7 @@ export async function register(login: string, password: string) {
   const response = await fetch(`${corsUrl}${authUrl}register`, {
     method: "POST",
     headers: {
-      ...headers,
-      "Content-Type": "application/json;charset=utf-8",
+      ...postHeaders,
     },
     body: JSON.stringify({ login, password }),
   });

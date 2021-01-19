@@ -22,16 +22,12 @@ const Pagination = ({
   }, [totalRecords, limitRecords]);
 
   const handleLeftClick = useCallback(() => {
-    console.log("currentPage", currentPage);
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   }, [currentPage, setCurrentPage]);
 
   const handleRightClick = useCallback(() => {
-    console.log("currentPage", currentPage);
-    console.log("totalPages", totalPages);
-    console.log("totalRecords", totalRecords);
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
