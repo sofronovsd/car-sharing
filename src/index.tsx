@@ -3,16 +3,31 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import AdminPage from "./components/pages/admin-page/admin-page";
+import { transitions, positions, Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+
+const options = {
+  position: positions.TOP_RIGHT,
+  timeout: 5000,
+  offset: "30px",
+  transition: transitions.SCALE,
+};
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <AlertProvider template={AlertTemplate} {...options}>
+        <BrowserRouter basename="/car-sharing">
+          <Switch>
+            <Route path="/admin/" component={AdminPage} />
+            <Route path="/" component={App} />
+          </Switch>
+        </BrowserRouter>
+      </AlertProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

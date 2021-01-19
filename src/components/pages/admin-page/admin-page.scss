@@ -1,0 +1,17 @@
+.button-adm {
+  width: 110px;
+  height: 29px;
+  font-size: 11.5px;
+  line-height: 13px;
+  text-align: center;
+  letter-spacing: -0.0821429px;
+  color: #FFFFFF;
+  background: #007BFF;
+  border: 0.5px solid #007BFF;
+  border-radius: 4px;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}

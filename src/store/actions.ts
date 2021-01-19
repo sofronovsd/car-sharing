@@ -1,4 +1,5 @@
 import {
+  AUTHENTICATE,
   CHANGE_STAGE,
   FETCH_CARS,
   FETCH_CITIES,
@@ -18,6 +19,7 @@ import {
   SET_PRICE,
   SET_RATE,
   SET_RIGHT_WHEEL,
+  UNAUTHENTICATE,
 } from "./types";
 import {
   loadCars,
@@ -33,6 +35,7 @@ import ICity from "./interfaces/i-city";
 import IPoint from "./interfaces/i-point";
 import { Moment } from "moment";
 import { OrderState } from "./orderReducer";
+import { AuthState } from "./authReducer";
 
 export function setCity(city: ICity | undefined) {
   return {
@@ -164,5 +167,33 @@ export function setModel(car: ICar | undefined) {
   return {
     type: SET_MODEL,
     payload: car,
+  };
+}
+
+export function authenticate(auth: AuthState) {
+  return {
+    type: AUTHENTICATE,
+    payload: auth,
+  };
+}
+
+export function unauthenticate() {
+  return {
+    type: UNAUTHENTICATE,
+    payload: null,
+  };
+}
+
+export function logIn(auth: AuthState) {
+  return async (dispatch: Dispatch<IAction>) => {
+    await window.localStorage.setItem("authenticated", "true");
+    dispatch(authenticate(auth));
+  };
+}
+
+export function logOut() {
+  return async (dispatch: Dispatch<IAction>) => {
+    await window.localStorage.setItem("authenticated", "false");
+    dispatch(unauthenticate());
   };
 }
