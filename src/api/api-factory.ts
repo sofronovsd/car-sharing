@@ -103,6 +103,55 @@ export async function getCars(token: string, limit: number, page: number) {
   }
 }
 
+export async function getCarById(token: string, carId: string) {
+  const response = await fetch(`${corsUrl}${dbUrl}car/${carId}`, {
+    method: "GET",
+    headers: { ...headers, Authorization: `Bearer ${token}` },
+  });
+
+  if (response.ok) {
+    return response.json();
+  }
+}
+
+export async function editCarById(
+  token: string,
+  carId: string,
+  name: string,
+  description: string
+) {
+  const response = await fetch(`${corsUrl}${dbUrl}car/${carId}`, {
+    method: "PUT",
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify({
+      name,
+      description,
+    }),
+  });
+
+  if (response.ok) {
+    return response.json();
+  }
+}
+
+export async function getCities(token: string, limit: number, page: number) {
+  const response = await fetch(
+    `${corsUrl}${dbUrl}city?page=${page}&limit=${limit}`,
+    {
+      method: "GET",
+      headers: { ...headers, Authorization: `Bearer ${token}` },
+    }
+  );
+
+  if (response.ok) {
+    return response.json();
+  }
+}
+
 export async function login(username: string, password: string) {
   const response = await fetch(`${corsUrl}${authUrl}login`, {
     method: "POST",

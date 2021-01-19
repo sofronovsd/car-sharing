@@ -8,7 +8,7 @@ const AdminMenu = () => {
         <AdminMenuItem
           iconClassName="auto"
           label="Карточка автомобиля"
-          route="/admin/car"
+          route="/admin/cars/:carId"
         />
       </li>
       <li>
@@ -35,8 +35,8 @@ const AdminMenu = () => {
       <li>
         <AdminMenuItem
           iconClassName="menu5"
-          label="Menu 5"
-          route="/admin/orders"
+          label="Города"
+          route="/admin/cities"
         />
       </li>
       <li>

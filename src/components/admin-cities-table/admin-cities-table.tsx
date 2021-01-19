@@ -1,36 +1,25 @@
-import React, { useCallback, useEffect, useState } from "react";
-import "./admin-cars-table.scss";
+import React, { useEffect, useState } from "react";
+import "./admin-cities-table.scss";
 import { useSelector } from "react-redux";
 import { accessTokenSelector } from "../../store/selectors";
-import { getCars } from "../../api/api-factory";
-import ICar from "../../store/interfaces/i-car";
+import { getCities } from "../../api/api-factory";
 import Pagination from "../pagination/pagination";
 import { useHistory } from "react-router-dom";
+import ICity from "../../store/interfaces/i-city";
 
 const limit = 5;
 
-const AdminCarsTable = () => {
+const AdminCitiesTable = () => {
   const accessToken = useSelector(accessTokenSelector);
-  const [cars, setCars] = useState([] as ICar[]);
+  const [cities, setCities] = useState([] as ICity[]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalRecords, setTotalRecords] = useState(0);
   const history = useHistory();
 
-  const handleCarClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      const target = event.target as HTMLDivElement;
-      const carRow = target.closest(".admin-table_row");
-      console.log("carRow?.id", carRow?.id);
-
-      history.push(`/admin/cars/${carRow?.id}`);
-    },
-    [history]
-  );
-
   useEffect(() => {
-    getCars(accessToken, limit, currentPage)
+    getCities(accessToken, limit, currentPage)
       .then((res) => {
-        setCars(res.data);
+        setCities(res.data);
         setTotalRecords(res.count);
       })
       .catch(() => {
@@ -42,15 +31,11 @@ const AdminCarsTable = () => {
     <div className="admin-table">
       <div className="admin-table_row admin-table_row__headers">
         <div>Название</div>
-        <div>Минимальная цена</div>
-        <div>Максимальная цена</div>
       </div>
-      {cars.map((car) => {
+      {cities.map((city) => {
         return (
-          <div className="admin-table_row" id={car.id} onClick={handleCarClick}>
-            <div>{car.name}</div>
-            <div>{car.priceMin}</div>
-            <div>{car.priceMax}</div>
+          <div className="admin-table_row">
+            <div>{city.name}</div>
           </div>
         );
       })}
@@ -65,4 +50,4 @@ const AdminCarsTable = () => {
   );
 };
 
-export default AdminCarsTable;
+export default AdminCitiesTable;

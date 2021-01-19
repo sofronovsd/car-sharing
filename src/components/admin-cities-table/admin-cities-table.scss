@@ -1,0 +1,39 @@
+.admin-table {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+
+  &_row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0.25rem;
+    box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11), 0 4px 8px rgba(90, 97, 105, 0.12), 0 10px 10px rgba(90, 97, 105, 0.06), 0 7px 70px rgba(90, 97, 105, 0.1);
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: -0.377143px;
+
+    color: #818EA3;
+
+    div {
+      padding: 0 0.5rem;
+    }
+
+    &:not(:first-child):hover {
+      background-color: #E0E2E8;
+      cursor: pointer;
+    }
+
+
+    &__headers {
+      margin-bottom: 1rem;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 16px;
+      letter-spacing: -0.377143px;
+
+      color: #3D5170;
+    }
+  }
+}

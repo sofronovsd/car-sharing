@@ -10,6 +10,17 @@
   border: 0.5px solid #007BFF;
   border-radius: 4px;
 
+  &__red {
+    background: #CB3656;
+    border: 0.5px solid #CB3656;
+  }
+
+  &__disabled {
+    background: #E9ECEF;
+    border: 0.5px solid #E9ECEF;
+    color: #3D5170;
+  }
+
   &:hover {
     cursor: pointer;
     opacity: 0.8;

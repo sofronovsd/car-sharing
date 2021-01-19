@@ -37,6 +37,52 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
+    flex-grow: 1;
+  }
+
+  &_buttons {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+    }
+
+    button + button {
+      margin-left: 1rem;
+    }
+  }
+
+  &_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+
+    h2 {
+      font-weight: normal;
+      font-size: 24.5px;
+      line-height: 28px;
+      text-align: center;
+      letter-spacing: -0.6125px;
+
+      color: #3D5170;
+    }
+
+    h4 {
+      font-weight: normal;
+      font-size: 12.5px;
+      line-height: 14px;
+      text-align: center;
+      letter-spacing: -0.3125px;
+
+      color: #818EA3;
+    }
+
+    img {
+      width: 231px;
+    }
   }
 
   &_progress {
@@ -58,7 +104,7 @@
         color: #868E96;
       }
 
-      h4+h4 {
+      h4 + h4 {
         font-weight: normal;
         font-size: 11px;
         line-height: 13px;
