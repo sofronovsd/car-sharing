@@ -138,6 +138,20 @@ export async function editCarById(
   }
 }
 
+export async function removeCarById(token: string, carId: string) {
+  const response = await fetch(`${corsUrl}${dbUrl}car/${carId}`, {
+    method: "DELETE",
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (response.ok) {
+    return response.json();
+  }
+}
+
 export async function getCities(token: string, limit: number, page: number) {
   const response = await fetch(
     `${corsUrl}${dbUrl}city?page=${page}&limit=${limit}`,

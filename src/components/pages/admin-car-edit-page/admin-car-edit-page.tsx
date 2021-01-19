@@ -8,6 +8,7 @@ import {
   editCarById,
   getCarById,
   loadCarImage,
+  removeCarById,
 } from "../../../api/api-factory";
 import ICar from "../../../store/interfaces/i-car";
 import { useAlert } from "react-alert";
@@ -20,6 +21,8 @@ const AdminCarEditPage = () => {
   const accessToken = useSelector(accessTokenSelector);
   const [modelName, setModelName] = useState("");
   const [modelType, setModelType] = useState("");
+  const [defaultModelName, setDefaultModelName] = useState("");
+  const [defaultModelType, setDefaultModelType] = useState("");
   const [progress, setProgress] = useState(0);
   const [imgSrc, setImgSrc] = useState("");
   const [car, setCar] = useState({} as ICar);
@@ -43,8 +46,10 @@ const AdminCarEditPage = () => {
     if (car) {
       setModelName(car.name);
       setModelType(car.description);
+      setDefaultModelName(car.name);
+      setDefaultModelType(car.description);
 
-      if (!imgSrc) {
+      if (!imgSrc && car?.thumbnail?.path) {
         loadCarImage(car?.thumbnail?.path).then((blob) => {
           setImgSrc(URL.createObjectURL(blob));
         });
@@ -62,18 +67,32 @@ const AdminCarEditPage = () => {
       });
   }, [accessToken, carId, history]);
 
-  const handleSaveClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      editCarById(accessToken, carId, modelName, modelType)
-        .then(() => {
-          alert.show("Изменения сохранены", { type: "success" });
-        })
-        .catch(() => {
-          alert.show("Ошибка сохранения", { type: "error" });
-        });
-    },
-    [accessToken, alert, carId, modelName, modelType]
-  );
+  const handleSaveClick = useCallback(() => {
+    editCarById(accessToken, carId, modelName, modelType)
+      .then(() => {
+        alert.show("Изменения сохранены", { type: "success" });
+        history.push("/admin/cars");
+      })
+      .catch(() => {
+        alert.show("Ошибка сохранения", { type: "error" });
+      });
+  }, [accessToken, alert, carId, history, modelName, modelType]);
+
+  const handleRemoveClick = useCallback(() => {
+    removeCarById(accessToken, carId)
+      .then(() => {
+        alert.show("Удаление прошло успешно", { type: "success" });
+        history.push("/admin/cars");
+      })
+      .catch(() => {
+        alert.show("Ошибка удаления", { type: "error" });
+      });
+  }, [accessToken, alert, carId, history]);
+
+  const handleCancelClick = useCallback(() => {
+    setModelName(defaultModelName);
+    setModelType(defaultModelType);
+  }, [defaultModelName, defaultModelType]);
 
   const handleModelNameChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -135,11 +154,19 @@ const AdminCarEditPage = () => {
               <button className="button-adm" onClick={handleSaveClick}>
                 Сохранить
               </button>
-              <button className="button-adm button-adm__disabled">
+              <button
+                className="button-adm button-adm__disabled"
+                onClick={handleCancelClick}
+              >
                 Отменить
               </button>
             </div>
-            <button className="button-adm button-adm__red">Удалить</button>
+            <button
+              className="button-adm button-adm__red"
+              onClick={handleRemoveClick}
+            >
+              Удалить
+            </button>
           </div>
         </div>
       </div>
