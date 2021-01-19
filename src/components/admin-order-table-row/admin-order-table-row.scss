@@ -1,0 +1,109 @@
+.admin-order-table-row {
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 0 rgba(90, 97, 105, 0.11), 0 4px 8px rgba(90, 97, 105, 0.12), 0 10px 10px rgba(90, 97, 105, 0.06), 0 7px 70px rgba(90, 97, 105, 0.1);
+  display: grid;
+  grid-template-columns: 1fr 3fr 2fr 2fr 2fr;
+
+  &_column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 1rem;
+  }
+
+  &_img {
+    width: 138px;
+    height: 63px;
+  }
+
+  &_price {
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: -0.754286px;
+  }
+
+  &_checkbox {
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: -0.175439px;
+    color: #999999;
+  }
+
+  &_button-group {
+    display: flex;
+
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    letter-spacing: -0.345714px;
+
+    color: #5A6169;
+
+    button {
+      width: 77px;
+      height: 24px;
+      background: #FFFFFF;
+      box-sizing: border-box;
+      border: 0.5px solid #BECAD6;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover {
+        cursor: pointer;
+        filter: brightness(80%);
+      }
+
+      .check {
+        &::before {
+          content: url("../../icons/Check Icon.svg");
+        }
+      }
+
+      .reject {
+        &::before {
+          content: url("../../icons/Reject Icon.svg");
+        }
+      }
+
+      .edit {
+        &::before {
+          content: url("../../icons/Edit Icon.svg");
+        }
+      }
+    }
+
+    button:first-child {
+      border-right: none;
+      border-radius: 4px 0 0 4px;
+    }
+
+    button:last-child {
+      border-left: none;
+      border-radius: 0 4px 4px 0;
+    }
+  }
+
+  &_info {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: -0.408571px;
+    color: #889098;
+
+    &__black {
+      color: #121212;
+    }
+
+    &__capitalized {
+      text-transform: capitalize;
+    }
+  }
+
+  &:hover {
+    background-color: #E0E2E8;
+  }
+}

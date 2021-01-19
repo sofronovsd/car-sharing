@@ -1,17 +1,19 @@
 import React from "react";
 import "./admin-menu-item.scss";
+import { Link } from "react-router-dom";
 
 interface AdminMenuItemProps {
   iconClassName: string;
   label: string;
+  route: string;
 }
 
-const AdminMenuItem = ({ iconClassName, label }: AdminMenuItemProps) => {
+const AdminMenuItem = ({ iconClassName, label, route }: AdminMenuItemProps) => {
   return (
-    <div className="admin-menu-item">
+    <Link to={route} className="admin-menu-item">
       <span className={iconClassName} />
       <h4>{label}</h4>
-    </div>
+    </Link>
   );
 };
 

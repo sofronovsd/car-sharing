@@ -46,6 +46,15 @@ const LoginPage = () => {
         });
     }
   }, [alert, dispatch, history, mail, password]);
+
+  const handleEnterPress = useCallback(
+    (e) => {
+      if (e.key === "Enter") {
+        handleLogin();
+      }
+    },
+    [handleLogin]
+  );
   return (
     <div className="login-page_container">
       <div className="login-page">
@@ -55,7 +64,7 @@ const LoginPage = () => {
         </div>
         <div className="dialog">
           <h3 className="dialog_header">Вход</h3>
-          <form className="dialog_form">
+          <form className="dialog_form" onKeyPress={handleEnterPress}>
             <CustomInput
               label="Почта"
               type="email"

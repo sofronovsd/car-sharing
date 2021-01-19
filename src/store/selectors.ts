@@ -38,3 +38,5 @@ export const ratesSelector = (state: SelectorsState) => state.model.rates;
 export const orderSelector = (state: SelectorsState) => state.order;
 export const authenticatedSelector = (state: SelectorsState) =>
   state.auth.isAuthenticated;
+export const accessTokenSelector = (state: SelectorsState) =>
+  state.auth.accessToken;
